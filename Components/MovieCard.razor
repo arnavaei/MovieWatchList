@@ -1,0 +1,23 @@
+﻿@using MovieWatchList.Models
+<div class="movie-card">
+    <h4>@Movie.Title (@Movie.ReleaseDate)</h4>
+    <p>Director: @Movie.Director</p>
+    <p>Genre: @Movie.Genre</p>
+    <p>Rating: @Movie.Rating</p>
+    <button @onclick="() => OnAddToWatchList.InvokeAsync(Movie)">
+        Add to WatchList
+    </button>
+</div>
+
+@code
+{
+    [Parameter]
+    public Movie Movie { get; set; } = default!;
+
+    [Parameter]
+    public EventCallback<Movie> OnAddToWatchList { get; set; }
+    
+    [Parameter]
+    public bool IsInWatchList {get; set;}
+}
+

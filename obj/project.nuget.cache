@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "nlmYgrZ6UI4=",
+  "success": true,
+  "projectFilePath": "C:\\Users\\y.arnavaei\\RiderProjects\\MovieWatchlist\\MovieWatchList\\MovieWatchList.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\y.arnavaei\\.nuget\\packages\\microsoft.aspnetcore.app.internal.assets\\10.0.11\\microsoft.aspnetcore.app.internal.assets.10.0.11.nupkg.sha512"
+  ],
+  "logs": []
+}

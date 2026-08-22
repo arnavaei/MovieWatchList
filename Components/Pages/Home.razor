@@ -10,10 +10,14 @@
 
 @foreach (var movie in movies)
 {
-    <MovieCard @key="movie.Id" Movie="movie" OnAddToWatchList="HandleAddToWatchList" />
+    <MovieCard 
+        @key="movie.Id"
+        Movie="movie"
+        OnAddToWatchList="HandleAddToWatchList"
+        IsInWatchList="@watchList.Any(m => m.Id == movie.Id)" />
 }
 
-<hr />
+<hr/>
 
 <h2>My WatchList (@watchList.Count)</h2>
 

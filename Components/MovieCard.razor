@@ -4,9 +4,19 @@
     <p>Director: @Movie.Director</p>
     <p>Genre: @Movie.Genre</p>
     <p>Rating: @Movie.Rating</p>
-    <button @onclick="() => OnAddToWatchList.InvokeAsync(Movie)">
-        Add to WatchList
-    </button>
+
+    @if (IsInWatchList)
+    {
+        <button class="AddButton" disabled>
+            Added to Watchlist
+        </button>
+    }
+    else
+    {
+        <button class="AddButton" @onclick="() => OnAddToWatchList.InvokeAsync(Movie)">
+            Add to WatchList
+        </button>
+    }
 </div>
 
 @code
@@ -16,8 +26,7 @@
 
     [Parameter]
     public EventCallback<Movie> OnAddToWatchList { get; set; }
-    
-    [Parameter]
-    public bool IsInWatchList {get; set;}
-}
 
+    [Parameter]
+    public bool IsInWatchList { get; set; }
+}

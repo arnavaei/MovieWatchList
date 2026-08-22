@@ -4,37 +4,51 @@
 
 <PageTitle>Home</PageTitle>
 
-<h1>Movie WatchList</h1>
-<h3>Movies: @movies.Count</h3>
-<p>My Movies Collection</p>
+<div class="page">
+    <header class="page__header">
+        <h1 class="page__title">Movie Watchlist</h1>
+        <p class="page__subtitle">@movies.Count movies in your collection</p>
+    </header>
 
-@foreach (var movie in movies)
-{
-    <MovieCard 
-        @key="movie.Id"
-        Movie="movie"
-        OnAddToWatchList="HandleAddToWatchList"
-        IsInWatchList="@watchList.Any(m => m.Id == movie.Id)" />
-}
+    <section class="movie-grid">
+        @foreach (var movie in movies)
+        {
+            <MovieCard
+                @key="movie.Id"
+                Movie="movie"
+                OnAddToWatchList="HandleAddToWatchList"
+                IsInWatchList="@watchList.Any(m => m.Id == movie.Id)" />
+        }
+    </section>
 
-<hr/>
+    <hr class="divider" />
 
-<h2>My WatchList (@watchList.Count)</h2>
+    <section class="watchlist">
+        <h2 class="watchlist__title">My Watchlist <span class="watchlist__count">@watchList.Count</span></h2>
 
-@if (watchList.Count == 0)
-{
-    <p>List is empty. add from above</p>
-}
-else
-{
-    @foreach (var movie in watchList)
-    {
-        <div class="watchlist-item">
-            <span>@movie.Title (@movie.ReleaseDate)</span>
-            <button @onclick="() => RemoveFromWatchList(movie)">Remove</button>
-        </div>
-    }
-}
+        @if (watchList.Count == 0)
+        {
+            <p class="watchlist__empty">Your watchlist is empty. Add movies from above.</p>
+        }
+        else
+        {
+            <div class="watchlist__items">
+                @foreach (var movie in watchList)
+                {
+                    <div class="watchlist-item">
+                        <div>
+                            <span class="watchlist-item__title">@movie.Title</span>
+                            <span class="watchlist-item__year">@movie.ReleaseDate</span>
+                        </div>
+                        <button class="watchlist-item__remove" @onclick="() => RemoveFromWatchList(movie)">
+                            Remove
+                        </button>
+                    </div>
+                }
+            </div>
+        }
+    </section>
+</div>
 
 @code
 {

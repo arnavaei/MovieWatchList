@@ -1,0 +1,104 @@
+.page[b-2nwy3wgci1] {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 48px 24px 80px;
+    color: #e5e7eb;
+}
+
+.page__header[b-2nwy3wgci1] {
+    margin-bottom: 32px;
+}
+
+.page__title[b-2nwy3wgci1] {
+    font-size: 1.9rem;
+    font-weight: 700;
+    margin: 0 0 4px;
+    color: #f9fafb;
+    letter-spacing: -0.01em;
+}
+
+.page__subtitle[b-2nwy3wgci1] {
+    margin: 0;
+    color: #6b7280;
+    font-size: 0.95rem;
+}
+
+.movie-grid[b-2nwy3wgci1] {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 16px;
+}
+
+.divider[b-2nwy3wgci1] {
+    border: none;
+    border-top: 1px solid #262a33;
+    margin: 40px 0;
+}
+
+.watchlist__title[b-2nwy3wgci1] {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: #f9fafb;
+    margin: 0 0 16px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.watchlist__count[b-2nwy3wgci1] {
+    background: #e8b04b;
+    color: #14161a;
+    font-size: 0.75rem;
+    font-weight: 700;
+    padding: 2px 9px;
+    border-radius: 999px;
+}
+
+.watchlist__empty[b-2nwy3wgci1] {
+    color: #6b7280;
+    font-size: 0.9rem;
+}
+
+.watchlist__items[b-2nwy3wgci1] {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.watchlist-item[b-2nwy3wgci1] {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #1a1d24;
+    border: 1px solid #262a33;
+    border-radius: 8px;
+    padding: 12px 16px;
+}
+
+.watchlist-item__title[b-2nwy3wgci1] {
+    color: #f2f2f2;
+    font-weight: 500;
+    font-size: 0.9rem;
+    margin-right: 8px;
+}
+
+.watchlist-item__year[b-2nwy3wgci1] {
+    color: #6b7280;
+    font-size: 0.8rem;
+}
+
+.watchlist-item__remove[b-2nwy3wgci1] {
+    background: transparent;
+    border: 1px solid #2d3138;
+    color: #9ca3af;
+    border-radius: 6px;
+    padding: 6px 12px;
+    font-size: 0.8rem;
+    cursor: pointer;
+    transition: background 0.2s ease, color 0.2s ease;
+}
+
+.watchlist-item__remove:hover[b-2nwy3wgci1] {
+    background: #2a2e37;
+    color: #e5e7eb;
+}

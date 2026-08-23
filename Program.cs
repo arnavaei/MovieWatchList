@@ -1,8 +1,11 @@
 using MovieWatchList.Components;
+using MovieWatchList.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+builder.Services.AddHttpClient();
+builder.Services.AddScoped<TmdbService>();
 builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents();
 

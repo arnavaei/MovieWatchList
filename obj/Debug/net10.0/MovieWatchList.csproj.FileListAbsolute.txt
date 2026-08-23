@@ -83,5 +83,6 @@ C:\Users\y.arnavaei\RiderProjects\MovieWatchlist\MovieWatchList\obj\Debug\net10.
 C:\Users\y.arnavaei\RiderProjects\MovieWatchList\MovieWatchList\obj\Debug\net10.0\scopedcss\Components\MovieCard.razor.rz.scp.css
 C:\Users\y.arnavaei\RiderProjects\MovieWatchList\MovieWatchList\obj\Debug\net10.0\scopedcss\Components\Pages\Home.razor.rz.scp.css
 C:\Users\y.arnavaei\RiderProjects\MovieWatchList\MovieWatchList\obj\Debug\net10.0\compressed\n1ohndg3ol-{0}-ru14uzenng-ru14uzenng.gz
-C:\Users\y.arnavaei\RiderProjects\MovieWatchList\MovieWatchList\obj\Debug\net10.0\compressed\wcfktf9fhf-{0}-kvcofuo4zs-kvcofuo4zs.gz
-C:\Users\y.arnavaei\RiderProjects\MovieWatchList\MovieWatchList\obj\Debug\net10.0\compressed\449r9pdymq-{0}-kvcofuo4zs-kvcofuo4zs.gz
+C:\Users\y.arnavaei\RiderProjects\MovieWatchList\MovieWatchList\obj\Debug\net10.0\MovieWatchList.sourcelink.json
+C:\Users\y.arnavaei\RiderProjects\MovieWatchList\MovieWatchList\obj\Debug\net10.0\compressed\wcfktf9fhf-{0}-a1imd0kh5u-a1imd0kh5u.gz
+C:\Users\y.arnavaei\RiderProjects\MovieWatchList\MovieWatchList\obj\Debug\net10.0\compressed\449r9pdymq-{0}-a1imd0kh5u-a1imd0kh5u.gz

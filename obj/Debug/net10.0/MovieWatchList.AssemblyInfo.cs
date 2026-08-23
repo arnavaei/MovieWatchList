@@ -10,10 +10,11 @@
 using System;
 using System.Reflection;
 
+[assembly: Microsoft.Extensions.Configuration.UserSecrets.UserSecretsIdAttribute("a8000826-1e21-4291-8fe0-69ea5a3566a7")]
 [assembly: System.Reflection.AssemblyCompanyAttribute("MovieWatchList")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+9db4bbe0455f21d9bb26f611d5ea03fb918cf74f")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+c7268bd94eb81514ce026e6c50dfd7b440486a02")]
 [assembly: System.Reflection.AssemblyProductAttribute("MovieWatchList")]
 [assembly: System.Reflection.AssemblyTitleAttribute("MovieWatchList")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

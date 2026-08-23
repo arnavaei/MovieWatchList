@@ -1,5 +1,23 @@
 ﻿@using MovieWatchList.Models
+@using MovieWatchList.Services
+@inject TmdbService TmdbService
+
 <div class="movie-card">
+    <div class="movie-card__poster">
+        @if (isLoadingPoster)
+        {
+            <div class="movie-card__poster-placeholder">Loading...</div>
+        }
+        else if (posterUrl is not null)
+        {
+            <img src="@posterUrl" alt="@Movie.Title poster" />
+        }
+        else
+        {
+            <div class="movie-card__poster-placeholder">No Poster</div>
+        }
+    </div>
+
     <div class="movie-card__header">
         <h4 class="movie-card__title">@Movie.Title</h4>
         <span class="movie-card__year">@Movie.ReleaseDate</span>
@@ -14,26 +32,35 @@
 
     @if (IsInWatchList)
     {
-    <button class="btn btn--added" disabled>
-        <span class="btn__icon">✓</span> Added to Watchlist
-    </button>
+        <button class="btn btn--added" disabled>
+            <span class="btn__icon">✓</span> Added to Watchlist
+        </button>
     }
     else
     {
-    <button class="btn btn--add" @onclick="() => OnAddToWatchList.InvokeAsync(Movie)">
-        + Add to Watchlist
-    </button>
+        <button class="btn btn--add" @onclick="() => OnAddToWatchList.InvokeAsync(Movie)">
+            + Add to Watchlist
+        </button>
     }
 </div>
 
 @code
 {
-[Parameter]
-public Movie Movie { get; set; } = default!;
+    [Parameter]
+    public Movie Movie { get; set; } = default!;
 
-[Parameter]
-public EventCallback<Movie> OnAddToWatchList { get; set; }
+    [Parameter]
+    public EventCallback<Movie> OnAddToWatchList { get; set; }
 
-[Parameter]
-public bool IsInWatchList { get; set; }
+    [Parameter]
+    public bool IsInWatchList { get; set; }
+
+    private string? posterUrl;
+    private bool isLoadingPoster = true;
+
+    protected override async Task OnInitializedAsync()
+    {
+        posterUrl = await TmdbService.GetPosterUrlAsync(Movie.Title);
+        isLoadingPoster = false;
+    }
 }

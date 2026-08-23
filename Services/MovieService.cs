@@ -64,4 +64,9 @@ public class MovieService : IMovieService
         _watchList.Remove(movie);
         return Task.CompletedTask;
     }
+
+    public Movie? GetMovieById(int id)
+    {
+        return _movies.FirstOrDefault(m => m.Id == id);
+    }
 }

@@ -1,0 +1,11 @@
+﻿@page "/movie/{Id:int}"
+
+<h1>Movie Details</h1>
+
+<p>Movie ID: @Id</p>
+
+@code
+{
+    [Parameter]
+    public int Id {get; set;}
+}

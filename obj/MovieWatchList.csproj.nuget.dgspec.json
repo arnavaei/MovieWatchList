@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\y.arnavaei\\RiderProjects\\MovieWatchList\\MovieWatchList\\MovieWatchList.csproj": {}
+    "C:\\Users\\y.arnavaei\\Desktop\\MovieWatchList\\MovieWatchList\\MovieWatchList.csproj": {}
   },
   "projects": {
-    "C:\\Users\\y.arnavaei\\RiderProjects\\MovieWatchList\\MovieWatchList\\MovieWatchList.csproj": {
+    "C:\\Users\\y.arnavaei\\Desktop\\MovieWatchList\\MovieWatchList\\MovieWatchList.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\y.arnavaei\\RiderProjects\\MovieWatchList\\MovieWatchList\\MovieWatchList.csproj",
+        "projectUniqueName": "C:\\Users\\y.arnavaei\\Desktop\\MovieWatchList\\MovieWatchList\\MovieWatchList.csproj",
         "projectName": "MovieWatchList",
-        "projectPath": "C:\\Users\\y.arnavaei\\RiderProjects\\MovieWatchList\\MovieWatchList\\MovieWatchList.csproj",
+        "projectPath": "C:\\Users\\y.arnavaei\\Desktop\\MovieWatchList\\MovieWatchList\\MovieWatchList.csproj",
         "packagesPath": "C:\\Users\\y.arnavaei\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\y.arnavaei\\RiderProjects\\MovieWatchList\\MovieWatchList\\obj\\",
+        "outputPath": "C:\\Users\\y.arnavaei\\Desktop\\MovieWatchList\\MovieWatchList\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

@@ -1,9 +1,10 @@
 ﻿using System.Net.Http.Json;
 using MovieWatchList.Dtos;
+using MovieWatchList.Services.Interfaces;
 
 namespace MovieWatchList.Services;
 
-public class TmdbService
+public class TmdbService : ITmdbService
 {
     private readonly HttpClient _httpClient;
     private readonly string _apiKey;
@@ -16,11 +17,13 @@ public class TmdbService
                   ?? throw new InvalidOperationException("TmdbApiKey is missing from configuration.");
     }
 
-    public async Task<string?> GetPosterUrlAsync(string movieTitle)
+    public async Task<string?> GetPosterUrlAsync(
+        string movieTitle,
+        CancellationToken cancellationToken = default)
     {
         var url = $"https://api.themoviedb.org/3/search/movie?api_key={_apiKey}&query={Uri.EscapeDataString(movieTitle)}";
 
-        var response = await _httpClient.GetFromJsonAsync<TmdbSearchResponse>(url);
+        var response = await _httpClient.GetFromJsonAsync<TmdbSearchResponse>(url, cancellationToken);
 
         var firstResult = response?.Results.FirstOrDefault();
 

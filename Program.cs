@@ -1,11 +1,17 @@
 using MovieWatchList.Components;
 using MovieWatchList.Services;
+using MovieWatchList.Services.Interfaces;
+using MovieWatchList.ViewModels.Components;
+using MovieWatchList.ViewModels.Pages;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddHttpClient();
-builder.Services.AddScoped<TmdbService>();
+builder.Services.AddScoped<ITmdbService, TmdbService>();
+builder.Services.AddTransient<IMovieService, MovieService>();
+builder.Services.AddTransient<MovieListViewModel>();
+builder.Services.AddTransient<MovieCardViewModel>();
 builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents();
 

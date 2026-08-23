@@ -1,16 +1,16 @@
 ﻿@using MovieWatchList.Models
-@using MovieWatchList.Services
-@inject TmdbService TmdbService
+@using MovieWatchList.ViewModels.Components
+@inject MovieCardViewModel ViewModel
 
 <div class="movie-card">
     <div class="movie-card__poster">
-        @if (isLoadingPoster)
+        @if (ViewModel.IsLoadingPoster)
         {
             <div class="movie-card__poster-placeholder">Loading...</div>
         }
-        else if (posterUrl is not null)
+        else if (ViewModel.PosterUrl is not null)
         {
-            <img src="@posterUrl" alt="@Movie.Title poster" />
+            <img src="@ViewModel.PosterUrl" alt="@Movie.Title poster" />
         }
         else
         {
@@ -55,12 +55,8 @@
     [Parameter]
     public bool IsInWatchList { get; set; }
 
-    private string? posterUrl;
-    private bool isLoadingPoster = true;
-
     protected override async Task OnInitializedAsync()
     {
-        posterUrl = await TmdbService.GetPosterUrlAsync(Movie.Title);
-        isLoadingPoster = false;
+        await ViewModel.LoadPosterAsync(Movie.Title);
     }
 }

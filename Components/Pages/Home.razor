@@ -1,46 +1,48 @@
 ﻿@page "/"
 @rendermode InteractiveServer
 @using MovieWatchList.Models
+@using MovieWatchList.ViewModels.Pages
+@inject MovieListViewModel ViewModel
 
 <PageTitle>Home</PageTitle>
 
 <div class="page">
     <header class="page__header">
         <h1 class="page__title">Movie Watchlist</h1>
-        <p class="page__subtitle">@movies.Count movies in your collection</p>
+        <p class="page__subtitle">@ViewModel.Movies.Count movies in your collection</p>
     </header>
 
     <section class="movie-grid">
-        @foreach (var movie in movies)
+        @foreach (var movie in ViewModel.Movies)
         {
             <MovieCard
                 @key="movie.Id"
                 Movie="movie"
-                OnAddToWatchList="HandleAddToWatchList"
-                IsInWatchList="@watchList.Any(m => m.Id == movie.Id)" />
+                OnAddToWatchList="movie => ViewModel.AddToWatchListAsync(movie)"
+                IsInWatchList="@ViewModel.WatchList.Any(m => m.Id == movie.Id)" />
         }
     </section>
 
     <hr class="divider" />
 
     <section class="watchlist">
-        <h2 class="watchlist__title">My Watchlist <span class="watchlist__count">@watchList.Count</span></h2>
+        <h2 class="watchlist__title">My Watchlist <span class="watchlist__count">@ViewModel.WatchList.Count</span></h2>
 
-        @if (watchList.Count == 0)
+        @if (ViewModel.WatchList.Count == 0)
         {
             <p class="watchlist__empty">Your watchlist is empty. Add movies from above.</p>
         }
         else
         {
             <div class="watchlist__items">
-                @foreach (var movie in watchList)
+                @foreach (var movie in ViewModel.WatchList)
                 {
                     <div class="watchlist-item">
                         <div>
                             <span class="watchlist-item__title">@movie.Title</span>
                             <span class="watchlist-item__year">@movie.ReleaseDate</span>
                         </div>
-                        <button class="watchlist-item__remove" @onclick="() => RemoveFromWatchList(movie)">
+                        <button class="watchlist-item__remove" @onclick="() => ViewModel.RemoveFromWatchListAsync(movie)">
                             Remove
                         </button>
                     </div>
@@ -49,52 +51,3 @@
         }
     </section>
 </div>
-
-@code
-{
-    List<Movie> movies = new()
-    {
-        new Movie
-        {
-            Id = 1,
-            Title = "Inception",
-            ReleaseDate = 2010,
-            Director = "Christopher Nolan",
-            Genre = "Sci-Fi",
-            Rating = 8.8
-        },
-        new Movie
-        {
-            Id = 2,
-            Title = "Interstellar",
-            ReleaseDate = 2014,
-            Director = "Christopher Nolan",
-            Genre = "Sci-Fi",
-            Rating = 8.7
-        },
-        new Movie
-        {
-            Id = 3,
-            Title = "The Dark Knight",
-            ReleaseDate = 2008,
-            Director = "Christopher Nolan",
-            Genre = "Action",
-            Rating = 9.0
-        }
-    };
-
-    List<Movie> watchList = new();
-
-    void HandleAddToWatchList(Movie movie)
-    {
-        if (!watchList.Any(m => m.Id == movie.Id))
-        {
-            watchList.Add(movie);
-        }
-    }
-
-    void RemoveFromWatchList(Movie movie)
-    {
-        watchList.Remove(movie);
-    }
-}

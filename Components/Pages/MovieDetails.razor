@@ -18,6 +18,9 @@ else if (ViewModel.ErrorMessage is not null)
 {
     <h2>Something Went Wrong</h2>
     <p>@ViewModel.ErrorMessage</p>
+    <button @onclick="ReloadMovie">
+        Try Again
+    </button>
 }
 else if (ViewModel.Movie is null)
 {
@@ -68,5 +71,10 @@ else
     void GoBack()
     {
         Navigation.NavigateTo("/");
+    }
+
+    async Task ReloadMovie()
+    {
+        await ViewModel.LoadMovieAsync(Id);
     }
 }

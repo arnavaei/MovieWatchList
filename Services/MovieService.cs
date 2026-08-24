@@ -43,6 +43,26 @@ public class MovieService : IMovieService
         Director = "Christopher Nolan",
         Genre = "Thriller",
         Rating = 8.2
+        },
+        
+        new Movie
+        {
+        Id = 5,
+        Title = "A Clockwork Orange",
+        ReleaseDate = 1971,
+        Director = "Stanley Kubrick",
+        Genre = "Crime",
+        Rating = 8.6
+        },
+        
+        new Movie
+        {
+            Id = 6,
+            Title = "Reservoir Dogs",
+            ReleaseDate = 1992,
+            Director = "Quentin Tarantino",
+            Genre = "Thriller",
+            Rating = 8.1
         }
     ];
 

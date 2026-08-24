@@ -1,9 +1,10 @@
 ﻿using MovieWatchList.Models;
 using MovieWatchList.Services.Interfaces;
+using MovieWatchList.ViewModels.Base;
 
 namespace MovieWatchList.ViewModels.Pages;
 
-public class MovieDetailsViewModel
+public class MovieDetailsViewModel : ViewModelBase
 {
     private readonly IMovieService _movieService;
 
@@ -12,10 +13,6 @@ public class MovieDetailsViewModel
     public Movie? PreviousMovie { get; private set; }
 
     public Movie? NextMovie { get; private set; }
-
-    public bool IsLoading { get; private set; }
-
-    public string? ErrorMessage { get; private set; }
 
     public MovieDetailsViewModel(IMovieService movieService)
     {

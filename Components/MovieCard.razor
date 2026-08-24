@@ -6,7 +6,15 @@
     <div class="movie-card__poster">
         @if (ViewModel.IsLoadingPoster)
         {
-            <div class="movie-card__poster-placeholder">Loading...</div>
+            <div class="movie-card__poster-placeholder">
+                Loading...
+            </div>
+        }
+        else if (ViewModel.ErrorMessage is not null)
+        {
+            <div class="movie-card__poster-placeholder">
+                Poster unavailable
+            </div>
         }
         else if (ViewModel.PosterUrl is not null)
         {
@@ -14,7 +22,9 @@
         }
         else
         {
-            <div class="movie-card__poster-placeholder">No Poster</div>
+            <div class="movie-card__poster-placeholder">
+                No Poster
+            </div>
         }
     </div>
 

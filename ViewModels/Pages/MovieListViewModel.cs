@@ -10,7 +10,13 @@ public class MovieListViewModel : ViewModelBase
 
     public IReadOnlyList<Movie> Movies { get; private set; } = [];
 
-    public IReadOnlyList<Movie> WatchList { get; private set; } = [];
+    private IReadOnlyList<Movie> _WatchList = [];
+
+    public IReadOnlyList<Movie> WatchList
+    {
+        get => _WatchList;
+        private set => SetProperty(ref _WatchList, value);
+    }
 
     public MovieListViewModel(IMovieService movieService)
     {
@@ -25,7 +31,6 @@ public class MovieListViewModel : ViewModelBase
     {
         await _movieService.AddToWatchListAsync(movie, cancellationToken);
         WatchList = _movieService.GetWatchList();
-        OnPropertyChanged(nameof(WatchList));
     }
 
     public async Task RemoveFromWatchListAsync(
@@ -34,8 +39,5 @@ public class MovieListViewModel : ViewModelBase
     {
         await _movieService.RemoveFromWatchListAsync(movie, cancellationToken);
         WatchList = _movieService.GetWatchList();
-        OnPropertyChanged(nameof(WatchList));
     }
-    
-    public string? ErrorMessage { get; private set; }
 }

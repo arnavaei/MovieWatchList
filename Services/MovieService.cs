@@ -33,6 +33,16 @@ public class MovieService : IMovieService
             Director = "Christopher Nolan",
             Genre = "Action",
             Rating = 9.0
+        },
+        
+        new Movie
+        {
+        Id = 4,
+        Title = "Oppenheimer",
+        ReleaseDate = 2023,
+        Director = "Christopher Nolan",
+        Genre = "Thriller",
+        Rating = 8.2
         }
     ];
 
@@ -65,8 +75,9 @@ public class MovieService : IMovieService
         return Task.CompletedTask;
     }
 
-    public Movie? GetMovieById(int id)
+    public async Task<Movie?> GetMovieByIdAsync(int id)
     {
-        return _movies.FirstOrDefault(m => m.Id == id);
+        return await Task.FromResult(
+            _movies.FirstOrDefault(movie => movie.Id == id));
     }
 }

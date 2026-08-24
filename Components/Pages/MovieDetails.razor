@@ -1,11 +1,72 @@
-﻿@page "/movie/{Id:int}"
+﻿@page "/movies/details/{Id:int}"
+@using MovieWatchList.ViewModels.Pages
+@inject MovieDetailsViewModel ViewModel
+@inject NavigationManager Navigation
+
+<button @onclick="GoBack">
+    ← Back to Movies
+</button>
 
 <h1>Movie Details</h1>
 
 <p>Movie ID: @Id</p>
+@if (ViewModel.IsLoading)
+{
+    <p>Loading...</p>
+}
+else if (ViewModel.ErrorMessage is not null)
+{
+    <h2>Something Went Wrong</h2>
+    <p>@ViewModel.ErrorMessage</p>
+}
+else if (ViewModel.Movie is null)
+{
+    <h2>Movie Not Found :(</h2>
+    <p>We couldn't find a movie with ID @Id</p>
+    
+    <NavLink href="/">
+        ← Back to Movies
+    </NavLink>
+}
+else
+{
+    <h2>
+        @ViewModel.Movie.Title
+    </h2>
+    <p>Director: @ViewModel.Movie.Director</p>
+    <p>Genre: @ViewModel.Movie.Genre</p>
+    <p>Rating: @ViewModel.Movie.Rating.ToString("0.0")</p>
+    <p>Release Date: @ViewModel.Movie.ReleaseDate</p>
+}
+
+<div class="movie-navigation">
+    @if (ViewModel.PreviousMovie is not null)
+    {
+        <NavLink href="@($"/movies/details/{ViewModel.PreviousMovie.Id}")">
+            ← Previous Movie
+            </NavLink>
+
+    }
+    @if (ViewModel.NextMovie is not null)
+    {
+        <NavLink href="@($"/movies/details/{ViewModel.NextMovie.Id}")">
+            Next Movie →
+        </NavLink>
+    }
+</div>
 
 @code
 {
     [Parameter]
     public int Id {get; set;}
+
+    protected override async Task OnParametersSetAsync()
+    {
+        await ViewModel.LoadMovieAsync(Id);
+    }
+
+    void GoBack()
+    {
+        Navigation.NavigateTo("/");
+    }
 }

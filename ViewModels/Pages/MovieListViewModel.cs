@@ -36,4 +36,6 @@ public class MovieListViewModel : ViewModelBase
         WatchList = _movieService.GetWatchList();
         OnPropertyChanged(nameof(WatchList));
     }
+    
+    public string? ErrorMessage { get; private set; }
 }

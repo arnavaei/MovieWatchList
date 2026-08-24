@@ -42,7 +42,10 @@
             + Add to Watchlist
         </button>
     }
-    <button @onclick="ViewDetails">View Details</button>
+
+    <NavLink href="@($"/movies/details/{Movie.Id}")">
+        View Details
+    </NavLink>
 </div>
 
 @code
@@ -59,12 +62,5 @@
     protected override async Task OnInitializedAsync()
     {
         await ViewModel.LoadPosterAsync(Movie.Title);
-    }
-    [Inject]
-    private NavigationManager Navigation {get; set;} = default!;
-
-    void ViewDetails()
-    {
-        Navigation.NavigateTo($"/movies/details/{Movie.Id}");
     }
 }

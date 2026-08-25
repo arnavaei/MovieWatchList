@@ -1,0 +1,30 @@
+﻿@using MovieWatchList.Models
+
+<div class="Movie-info">
+    <h2>
+        @Movie.Title
+    </h2>
+    
+    <p>
+        Director: @Movie.Director
+    </p>
+    
+    <p>
+        Genre: @Movie.Genre
+    </p>
+    
+    <p>
+        Rating:
+        @Movie.Rating.ToString("0.0")
+    </p>
+    
+    <p>
+        Release Date:
+        @Movie.ReleaseDate
+    </p>
+</div>
+
+@code
+{
+    [Parameter] public Movie Movie { get; set; } = default;
+}

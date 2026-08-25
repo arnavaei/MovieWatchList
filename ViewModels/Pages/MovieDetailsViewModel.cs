@@ -7,16 +7,22 @@ namespace MovieWatchList.ViewModels.Pages;
 public class MovieDetailsViewModel : ViewModelBase
 {
     private readonly IMovieService _movieService;
+    private readonly ITmdbService _tmdbService;
 
     public Movie? Movie { get; private set; }
+    
+    public bool IsInWatchList {get; private set;}
+
+    public string? PosterUrl { get; private set; }
 
     public Movie? PreviousMovie { get; private set; }
 
     public Movie? NextMovie { get; private set; }
 
-    public MovieDetailsViewModel(IMovieService movieService)
+    public MovieDetailsViewModel(IMovieService movieService, ITmdbService tmdbService)
     {
         _movieService = movieService;
+        _tmdbService = tmdbService;
     }
 
     public async Task LoadMovieAsync(int id)
@@ -27,11 +33,20 @@ public class MovieDetailsViewModel : ViewModelBase
         Movie = null;
         PreviousMovie = null;
         NextMovie = null;
-
+        PosterUrl = null;
+        IsInWatchList = false;
+        
         try
         {
             Movie = await _movieService.GetMovieByIdAsync(id);
 
+            if (Movie is not null)
+            {
+                PosterUrl = await _tmdbService.GetPosterUrlAsync(Movie.Title);
+                
+                IsInWatchList = _movieService.GetWatchList().Any(movie => movie.Id == Movie.Id);
+            }
+            
             if (Movie is null)
             {
                 return;
@@ -56,6 +71,16 @@ public class MovieDetailsViewModel : ViewModelBase
         finally
         {
             IsLoading = false;
+        }
+    }
+
+    public async Task AddToWatchListAsync()
+    {
+        if (Movie is null)
+        {
+            return;
+            await _movieService.AddToWatchListAsync(Movie);
+            IsInWatchList = true;
         }
     }
 }

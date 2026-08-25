@@ -27,6 +27,10 @@ build_property.EnableCodeStyleSeverity =
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xBcHAucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Users/y.arnavaei/RiderProjects/MovieWatchList/MovieWatchList/Components/MovieInfo.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xNb3ZpZUluZm8ucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/y.arnavaei/RiderProjects/MovieWatchList/MovieWatchList/Components/Pages/Counter.razor]
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xDb3VudGVyLnJhem9y
 build_metadata.AdditionalFiles.CssScope = 

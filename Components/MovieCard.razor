@@ -27,18 +27,8 @@
             </div>
         }
     </div>
-
-    <div class="movie-card__header">
-        <h4 class="movie-card__title">@Movie.Title</h4>
-        <span class="movie-card__year">@Movie.ReleaseDate</span>
-    </div>
-
-    <div class="movie-card__meta">
-        <span class="movie-card__genre">@Movie.Genre</span>
-        <span class="movie-card__rating">★ @Movie.Rating.ToString("0.0")</span>
-    </div>
-
-    <p class="movie-card__director">Directed by @Movie.Director</p>
+    
+    <MovieInfo Movie="Movie" />
 
     @if (IsInWatchList)
     {

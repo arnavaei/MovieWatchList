@@ -9,8 +9,8 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddHttpClient();
 builder.Services.AddScoped<ITmdbService, TmdbService>();
-builder.Services.AddScoped<MovieDetailsViewModel>();
-builder.Services.AddTransient<IMovieService, MovieService>();
+builder.Services.AddScoped<IMovieService, MovieService>();
+builder.Services.AddTransient<MovieDetailsViewModel>();
 builder.Services.AddTransient<MovieListViewModel>();
 builder.Services.AddTransient<MovieCardViewModel>();
 builder.Services.AddRazorComponents()

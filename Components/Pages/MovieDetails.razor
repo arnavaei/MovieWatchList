@@ -33,13 +33,32 @@ else if (ViewModel.Movie is null)
 }
 else
 {
-    <h2>
-        @ViewModel.Movie.Title
-    </h2>
-    <p>Director: @ViewModel.Movie.Director</p>
-    <p>Genre: @ViewModel.Movie.Genre</p>
-    <p>Rating: @ViewModel.Movie.Rating.ToString("0.0")</p>
-    <p>Release Date: @ViewModel.Movie.ReleaseDate</p>
+    <div class="movie-details">
+        
+        @if (ViewModel.PosterUrl is not null)
+        {
+            <div class="movie-details__poster">
+                <img src="@ViewModel.PosterUrl" alt="@ViewModel.Movie.Title Poster"/>
+            </div>
+        }
+        <div class="movie-details__info">
+            <MovieInfo Movie="ViewModel.Movie" />
+
+            @if (ViewModel.IsInWatchList)
+            {
+                <button disabled>
+                    ✓ Added to Watchlist
+                </button>
+            }
+            else
+            {
+                <button @onclick="AddToWatchList">
+                    + Add To Watchlist
+                </button>
+            }
+        </div>
+            
+    </div>
 }
 
 <div class="movie-navigation">
@@ -76,5 +95,10 @@ else
     async Task ReloadMovie()
     {
         await ViewModel.LoadMovieAsync(Id);
+    }
+
+    async Task AddToWatchList()
+    {
+        await ViewModel.AddToWatchListAsync();
     }
 }

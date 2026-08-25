@@ -21,8 +21,6 @@ public class MovieListViewModel : ViewModelBase
     public MovieListViewModel(IMovieService movieService)
     {
         _movieService = movieService;
-        Movies = _movieService.GetMovies();
-        WatchList = _movieService.GetWatchList();
     }
 
     public async Task AddToWatchListAsync(
@@ -39,5 +37,25 @@ public class MovieListViewModel : ViewModelBase
     {
         await _movieService.RemoveFromWatchListAsync(movie, cancellationToken);
         WatchList = _movieService.GetWatchList();
+    }
+
+    public async Task LoacAsync()
+    {
+        IsLoading = true;
+        ErrorMessage = null;
+
+        try
+        {
+            Movies = _movieService.GetMovies();
+            WatchList = _movieService.GetWatchList();
+        }
+        catch (Exception)
+        {
+            ErrorMessage = "Failed to load movies";
+        }
+        finally
+        {
+            IsLoading = false;
+        }
     }
 }

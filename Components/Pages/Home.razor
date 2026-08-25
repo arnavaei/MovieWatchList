@@ -4,6 +4,7 @@
 @using MovieWatchList.ViewModels.Pages
 @inject MovieListViewModel ViewModel
 
+
 <PageTitle>Home</PageTitle>
 
 <div class="page">
@@ -51,3 +52,14 @@
         }
     </section>
 </div>
+
+
+
+
+@code
+{
+    protected override async Task OnInitializedAsync()
+    {
+        await ViewModel.LoacAsync();
+    }
+}

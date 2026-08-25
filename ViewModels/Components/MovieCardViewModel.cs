@@ -3,9 +3,10 @@ using MovieWatchList.ViewModels.Base;
 
 namespace MovieWatchList.ViewModels.Components;
 
-public class MovieCardViewModel : ViewModelBase
+public class MovieCardViewModel : ViewModelBase, IDisposable
 {
     private readonly ITmdbService _tmdbService;
+    private readonly CancellationTokenSource _cts = new();
 
     private string? _posterUrl;
 
@@ -32,6 +33,8 @@ public class MovieCardViewModel : ViewModelBase
         string movieTitle,
         CancellationToken cancellationToken = default)
     {
+        using var linkedCts = CancellationTokenSource
+            .CreateLinkedTokenSource(cancellationToken, _cts.Token);
         IsLoadingPoster = true;
         ErrorMessage = null;
 
@@ -39,7 +42,11 @@ public class MovieCardViewModel : ViewModelBase
         {
             PosterUrl = await _tmdbService.GetPosterUrlAsync(
                 movieTitle,
-                cancellationToken);
+                linkedCts.Token);
+        }
+        catch (OperationCanceledException)
+        {
+            // Operation Cancelled
         }
         catch (Exception)
         {
@@ -49,5 +56,11 @@ public class MovieCardViewModel : ViewModelBase
         {
             IsLoadingPoster = false;
         }
+    }
+
+    public void Dispose()
+    {
+        _cts.Cancel();
+        _cts.Dispose();
     }
 }

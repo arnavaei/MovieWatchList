@@ -10,9 +10,14 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddHttpClient();
 builder.Services.AddScoped<ITmdbService, TmdbService>();
 builder.Services.AddScoped<IMovieService, MovieService>();
+builder.Services.AddScoped<ISeriesService, SeriesService>();
+builder.Services.AddTransient<HomeViewModel>();
 builder.Services.AddTransient<MovieDetailsViewModel>();
 builder.Services.AddTransient<MovieListViewModel>();
 builder.Services.AddTransient<MovieCardViewModel>();
+builder.Services.AddTransient<SeriesDetailsViewModel>();
+builder.Services.AddTransient<SeriesListViewModel>();
+builder.Services.AddTransient<SeriesCardViewModel>();
 builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents();
 

@@ -1,0 +1,114 @@
+@using MovieWatchList.Models
+
+@if (Series is not null)
+{
+    @if (Variant == "detail")
+    {
+        <div class="series-info series-info--detail">
+            <div class="series-info__tags">
+                <span class="badge badge--network">@Series.Network</span>
+                <span class="badge badge--status badge--status-@Series.Status.ToLowerInvariant()">
+                    <span class="status-indicator"></span>
+                    @Series.Status
+                </span>
+                <span class="badge badge--genre">@Series.Genre</span>
+                <span class="badge badge--year">
+                    @Series.StartYear @(Series.EndYear.HasValue ? (Series.StartYear == Series.EndYear ? "" : $"– {Series.EndYear}") : "– Present")
+                </span>
+                <span class="badge badge--rating">
+                    <svg class="star-icon" width="13" height="13" viewBox="0 0 24 24" fill="#e8b04b" stroke="#e8b04b" stroke-width="1">
+                        <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+                    </svg>
+                    @Series.Rating.ToString("0.0")
+                </span>
+            </div>
+
+            <h1 class="series-info__detail-title">@Series.Title</h1>
+
+            <p class="series-info__creator-callout">
+                <span class="callout-icon">
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <rect width="20" height="15" x="2" y="7" rx="2" ry="2"></rect>
+                        <polyline points="17 2 12 7 7 2"></polyline>
+                    </svg>
+                </span>
+                <span>Created by <strong class="creator-name">@Series.Creator</strong></span>
+            </p>
+
+            @if (!string.IsNullOrWhiteSpace(Series.Overview))
+            {
+                <div class="series-info__overview">
+                    <h3 class="overview-title">Synopsis</h3>
+                    <p class="overview-text">@Series.Overview</p>
+                </div>
+            }
+
+            <div class="series-info__grid">
+                <div class="stat-pill">
+                    <span class="stat-pill__label">Network / Platform</span>
+                    <span class="stat-pill__value">@Series.Network</span>
+                </div>
+                <div class="stat-pill">
+                    <span class="stat-pill__label">Seasons & Episodes</span>
+                    <span class="stat-pill__value">@Series.Seasons @(Series.Seasons == 1 ? "Season" : "Seasons") • @Series.Episodes Eps</span>
+                </div>
+                <div class="stat-pill">
+                    <span class="stat-pill__label">Creator</span>
+                    <span class="stat-pill__value">@Series.Creator</span>
+                </div>
+                <div class="stat-pill">
+                    <span class="stat-pill__label">Airing Period</span>
+                    <span class="stat-pill__value">@Series.StartYear @(Series.EndYear.HasValue ? (Series.StartYear == Series.EndYear ? "" : $"– {Series.EndYear}") : "– Present")</span>
+                </div>
+                <div class="stat-pill">
+                    <span class="stat-pill__label">Production Status</span>
+                    <span class="stat-pill__value">@Series.Status</span>
+                </div>
+                <div class="stat-pill stat-pill--highlight">
+                    <span class="stat-pill__label">Audience Score</span>
+                    <div class="stat-pill__score">
+                        <svg class="star-icon" width="16" height="16" viewBox="0 0 24 24" fill="#e8b04b" stroke="#e8b04b" stroke-width="1">
+                            <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+                        </svg>
+                        <span class="score-num">@Series.Rating.ToString("0.0")</span>
+                        <span class="score-scale">/ 10</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+    else
+    {
+        <div class="series-info series-info--card">
+            <div class="series-info__header">
+                <h3 class="series-info__title" title="@Series.Title">@Series.Title</h3>
+                <span class="series-info__year">
+                    @Series.StartYear@(Series.EndYear.HasValue && Series.EndYear != Series.StartYear ? $"–'{Series.EndYear.Value % 100:00}" : (Series.EndYear.HasValue ? "" : "–now"))
+                </span>
+            </div>
+
+            <p class="series-info__creator" title="Created by @Series.Creator">
+                <span class="creator-prefix">By</span> @Series.Creator
+            </p>
+
+            <div class="series-info__meta-row">
+                <span class="series-info__genre" title="@Series.Genre">@Series.Genre</span>
+                <div class="series-info__badges">
+                    <span class="series-info__seasons-tag">@Series.Seasons @(Series.Seasons == 1 ? "Ssn" : "Ssns")</span>
+                    <div class="series-info__rating" title="Rating: @Series.Rating.ToString("0.0")/10">
+                        <svg class="star-icon" width="12" height="12" viewBox="0 0 24 24" fill="#e8b04b" stroke="#e8b04b" stroke-width="1">
+                            <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+                        </svg>
+                        <span>@Series.Rating.ToString("0.0")</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+}
+
+@code
+{
+    [Parameter] public Series Series { get; set; } = default!;
+    [Parameter] public string Variant { get; set; } = "card";
+}

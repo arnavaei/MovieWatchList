@@ -1,0 +1,328 @@
+/* ==========================================================================
+   SERIES INFO - Card Variant
+   ========================================================================== */
+.series-info--card[b-9caawfr4qn] {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    min-width: 0;
+}
+
+.series-info__header[b-9caawfr4qn] {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 8px;
+    min-width: 0;
+}
+
+.series-info__title[b-9caawfr4qn] {
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: #f9fafb;
+    margin: 0;
+    line-height: 1.35;
+    letter-spacing: -0.01em;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    min-width: 0;
+    flex: 1;
+}
+
+.series-info__year[b-9caawfr4qn] {
+    font-size: 0.78rem;
+    font-weight: 500;
+    color: #9ca3af;
+    background: rgba(255, 255, 255, 0.05);
+    padding: 2px 7px;
+    border-radius: 6px;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    white-space: nowrap;
+    flex-shrink: 0;
+}
+
+.series-info__creator[b-9caawfr4qn] {
+    font-size: 0.82rem;
+    color: #9ca3af;
+    margin: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    min-width: 0;
+}
+
+.creator-prefix[b-9caawfr4qn] {
+    color: #6b7280;
+    font-size: 0.78rem;
+    font-weight: 600;
+    margin-right: 2px;
+}
+
+.series-info__meta-row[b-9caawfr4qn] {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 6px;
+    margin-top: 4px;
+    min-width: 0;
+}
+
+.series-info__genre[b-9caawfr4qn] {
+    font-size: 0.72rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: #cbd5e1;
+    background: rgba(255, 255, 255, 0.06);
+    padding: 3px 8px;
+    border-radius: 999px;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    min-width: 0;
+    flex-shrink: 1;
+}
+
+.series-info__badges[b-9caawfr4qn] {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    flex-shrink: 0;
+}
+
+.series-info__seasons-tag[b-9caawfr4qn] {
+    font-size: 0.72rem;
+    font-weight: 600;
+    color: #60a5fa;
+    background: rgba(59, 130, 246, 0.12);
+    border: 1px solid rgba(59, 130, 246, 0.25);
+    padding: 2px 7px;
+    border-radius: 6px;
+    white-space: nowrap;
+    flex-shrink: 0;
+}
+
+.series-info__rating[b-9caawfr4qn] {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 0.82rem;
+    font-weight: 700;
+    color: #fbbf24;
+    background: rgba(232, 176, 75, 0.1);
+    padding: 2px 7px;
+    border-radius: 999px;
+    border: 1px solid rgba(232, 176, 75, 0.2);
+    white-space: nowrap;
+    flex-shrink: 0;
+}
+
+.star-icon[b-9caawfr4qn] {
+    flex-shrink: 0;
+}
+
+/* ==========================================================================
+   SERIES INFO - Detail Variant
+   ========================================================================== */
+.series-info--detail[b-9caawfr4qn] {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    animation: fadeIn 0.4s ease;
+}
+
+.series-info__tags[b-9caawfr4qn] {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px;
+}
+
+.badge[b-9caawfr4qn] {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 0.78rem;
+    font-weight: 600;
+    padding: 4px 12px;
+    border-radius: 999px;
+    letter-spacing: 0.02em;
+}
+
+.badge--network[b-9caawfr4qn] {
+    background: linear-gradient(135deg, rgba(168, 85, 247, 0.2), rgba(147, 51, 234, 0.08));
+    color: #d8b4fe;
+    border: 1px solid rgba(168, 85, 247, 0.35);
+    text-transform: uppercase;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+}
+
+.badge--status[b-9caawfr4qn] {
+    background: rgba(255, 255, 255, 0.06);
+    color: var(--text-secondary, #cbd5e1);
+    border: 1px solid var(--border-subtle, rgba(255, 255, 255, 0.1));
+}
+
+.status-indicator[b-9caawfr4qn] {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: #94a3b8;
+}
+
+.badge--status-ongoing[b-9caawfr4qn] {
+    background: rgba(16, 185, 129, 0.12);
+    color: #34d399;
+    border-color: rgba(16, 185, 129, 0.3);
+}
+
+.badge--status-ongoing .status-indicator[b-9caawfr4qn] {
+    background: #10b981;
+    box-shadow: 0 0 8px #10b981;
+    animation: pulseGlow 2s infinite ease-in-out;
+}
+
+.badge--status-miniseries[b-9caawfr4qn] {
+    background: rgba(236, 72, 153, 0.12);
+    color: #f472b6;
+    border-color: rgba(236, 72, 153, 0.3);
+}
+
+.badge--status-miniseries .status-indicator[b-9caawfr4qn] {
+    background: #ec4899;
+}
+
+.badge--genre[b-9caawfr4qn] {
+    background: rgba(255, 255, 255, 0.08);
+    color: #e2e8f0;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.badge--year[b-9caawfr4qn] {
+    background: rgba(255, 255, 255, 0.04);
+    color: #94a3b8;
+    border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.badge--rating[b-9caawfr4qn] {
+    background: rgba(232, 176, 75, 0.15);
+    color: #fbbf24;
+    border: 1px solid rgba(232, 176, 75, 0.3);
+}
+
+.series-info__detail-title[b-9caawfr4qn] {
+    font-size: clamp(1.8rem, 4vw, 2.75rem);
+    font-weight: 800;
+    color: #ffffff;
+    letter-spacing: -0.03em;
+    line-height: 1.15;
+    margin: 0;
+}
+
+.series-info__creator-callout[b-9caawfr4qn] {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.95rem;
+    color: #94a3b8;
+    margin: 0;
+}
+
+.callout-icon[b-9caawfr4qn] {
+    display: flex;
+    align-items: center;
+    color: var(--accent-amber, #e8b04b);
+}
+
+.creator-name[b-9caawfr4qn] {
+    color: #f1f5f9;
+    font-weight: 600;
+}
+
+.series-info__overview[b-9caawfr4qn] {
+    background: rgba(20, 23, 33, 0.5);
+    border: 1px solid var(--border-subtle, rgba(255, 255, 255, 0.07));
+    border-radius: 12px;
+    padding: 1rem 1.25rem;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.overview-title[b-9caawfr4qn] {
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--accent-amber, #e8b04b);
+    margin: 0;
+}
+
+.overview-text[b-9caawfr4qn] {
+    font-size: 0.92rem;
+    color: #cbd5e1;
+    line-height: 1.6;
+    margin: 0;
+}
+
+.series-info__grid[b-9caawfr4qn] {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 12px;
+    margin-top: 8px;
+}
+
+.stat-pill[b-9caawfr4qn] {
+    background: rgba(20, 23, 33, 0.6);
+    border: 1px solid var(--border-subtle, rgba(255, 255, 255, 0.07));
+    border-radius: 12px;
+    padding: 12px 14px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    transition: transform 0.2s ease, border-color 0.2s ease;
+}
+
+.stat-pill:hover[b-9caawfr4qn] {
+    border-color: rgba(255, 255, 255, 0.15);
+    transform: translateY(-2px);
+}
+
+.stat-pill__label[b-9caawfr4qn] {
+    font-size: 0.7rem;
+    font-weight: 700;
+    color: #64748b;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+}
+
+.stat-pill__value[b-9caawfr4qn] {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: #f8fafc;
+}
+
+.stat-pill--highlight[b-9caawfr4qn] {
+    background: linear-gradient(135deg, rgba(232, 176, 75, 0.12), rgba(20, 23, 33, 0.6));
+    border-color: rgba(232, 176, 75, 0.25);
+}
+
+.stat-pill__score[b-9caawfr4qn] {
+    display: flex;
+    align-items: baseline;
+    gap: 4px;
+}
+
+.score-num[b-9caawfr4qn] {
+    font-size: 1.15rem;
+    font-weight: 800;
+    color: #fbbf24;
+}
+
+.score-scale[b-9caawfr4qn] {
+    font-size: 0.75rem;
+    color: #94a3b8;
+}

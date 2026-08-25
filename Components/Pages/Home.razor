@@ -2,64 +2,281 @@
 @rendermode InteractiveServer
 @using MovieWatchList.Models
 @using MovieWatchList.ViewModels.Pages
-@inject MovieListViewModel ViewModel
+@inherits ViewModelComponentBase<HomeViewModel>
 
+<PageTitle>Home | CineTrack</PageTitle>
 
-<PageTitle>Home</PageTitle>
+<div class="home-container">
+    <!-- Hero Header -->
+    <header class="hero-header">
+        <div class="hero-header__content">
+            <div class="hero-badge">
+                <span class="hero-badge__dot"></span>
+                <span>CineTrack Entertainment Hub</span>
+            </div>
+            <h1 class="hero-title">Explore Movies & TV Series</h1>
+            <p class="hero-subtitle">Discover iconic cinema masterpieces, binge-worthy television series, and manage your personalized watchlist in one place.</p>
+        </div>
 
-<div class="page">
-    <header class="page__header">
-        <h1 class="page__title">Movie Watchlist</h1>
-        <p class="page__subtitle">@ViewModel.Movies.Count movies in your collection</p>
+        <div class="hero-stats">
+            <div class="stat-card">
+                <span class="stat-card__number">@ViewModel.TotalMovies</span>
+                <span class="stat-card__label">Movies</span>
+            </div>
+            <div class="stat-card">
+                <span class="stat-card__number">@ViewModel.TotalSeries</span>
+                <span class="stat-card__label">TV Series</span>
+            </div>
+            <div class="stat-card stat-card--accent">
+                <span class="stat-card__number">@ViewModel.TotalWatchListCount</span>
+                <span class="stat-card__label">In Watchlist</span>
+            </div>
+        </div>
     </header>
 
-    <section class="movie-grid">
-        @foreach (var movie in ViewModel.Movies)
-        {
-            <MovieCard
-                @key="movie.Id"
-                Movie="movie"
-                OnAddToWatchList="movie => ViewModel.AddToWatchListAsync(movie)"
-                IsInWatchList="@ViewModel.WatchList.Any(m => m.Id == movie.Id)" />
-        }
-    </section>
-
-    <hr class="divider" />
-
-    <section class="watchlist">
-        <h2 class="watchlist__title">My Watchlist <span class="watchlist__count">@ViewModel.WatchList.Count</span></h2>
-
-        @if (ViewModel.WatchList.Count == 0)
-        {
-            <p class="watchlist__empty">Your watchlist is empty. Add movies from above.</p>
-        }
-        else
-        {
-            <div class="watchlist__items">
-                @foreach (var movie in ViewModel.WatchList)
-                {
-                    <div class="watchlist-item">
-                        <div>
-                            <span class="watchlist-item__title">@movie.Title</span>
-                            <span class="watchlist-item__year">@movie.ReleaseDate</span>
+    @if (ViewModel.IsLoading)
+    {
+        <div class="loading-grid">
+            @for (int i = 0; i < 4; i++)
+            {
+                <div class="skeleton-card skeleton-shimmer">
+                    <div class="skeleton-poster"></div>
+                    <div class="skeleton-line" style="width: 70%;"></div>
+                    <div class="skeleton-line" style="width: 40%;"></div>
+                </div>
+            }
+        </div>
+    }
+    else if (ViewModel.ErrorMessage is not null)
+    {
+        <div class="error-banner">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#ef4444" stroke-width="2">
+                <circle cx="12" cy="12" r="10"></circle>
+                <line x1="12" y1="8" x2="12" y2="12"></line>
+                <line x1="12" y1="16" x2="12.01" y2="16"></line>
+            </svg>
+            <div>
+                <h4>Unable to Load Content</h4>
+                <p>@ViewModel.ErrorMessage</p>
+            </div>
+        </div>
+    }
+    else
+    {
+        <!-- Category Navigation Hub -->
+        <section class="hub-section">
+            <div class="hub-grid">
+                <!-- Movies Hub Card -->
+                <div class="hub-card hub-card--movies">
+                    <div class="hub-card__header">
+                        <div class="hub-icon hub-icon--amber">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <rect width="20" height="20" x="2" y="2" rx="2.18" ry="2.18"></rect>
+                                <line x1="7" x2="7" y1="2" y2="22"></line>
+                                <line x1="17" x2="17" y1="2" y2="22"></line>
+                                <line x1="2" x2="22" y1="12" y2="12"></line>
+                                <line x1="2" x2="7" y1="7" y2="7"></line>
+                                <line x1="2" x2="7" y1="17" y2="17"></line>
+                                <line x1="17" x2="22" y1="17" y2="17"></line>
+                                <line x1="17" x2="22" y1="7" y2="7"></line>
+                            </svg>
                         </div>
-                        <button class="watchlist-item__remove" @onclick="() => ViewModel.RemoveFromWatchListAsync(movie)">
-                            Remove
-                        </button>
+                        <span class="hub-badge">Cinema Archive</span>
                     </div>
+                    <div class="hub-card__body">
+                        <h2 class="hub-title">Feature Films</h2>
+                        <p class="hub-desc">Browse our curated collection of iconic movies, view cast details, director profiles, and ratings.</p>
+                    </div>
+                    <div class="hub-card__footer">
+                        <NavLink class="btn-hub" href="movies">
+                            <span>Explore Movies (@ViewModel.TotalMovies)</span>
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <polyline points="9 18 15 12 9 6"></polyline>
+                            </svg>
+                        </NavLink>
+                    </div>
+                </div>
+
+                <!-- TV Series Hub Card -->
+                <div class="hub-card hub-card--series">
+                    <div class="hub-card__header">
+                        <div class="hub-icon hub-icon--purple">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <rect width="20" height="15" x="2" y="7" rx="2" ry="2"></rect>
+                                <polyline points="17 2 12 7 7 2"></polyline>
+                            </svg>
+                        </div>
+                        <span class="hub-badge hub-badge--purple">Television Archive</span>
+                    </div>
+                    <div class="hub-card__body">
+                        <h2 class="hub-title">TV Series</h2>
+                        <p class="hub-desc">Discover acclaimed prestige dramas, bingeable seasons, network releases, and storylines.</p>
+                    </div>
+                    <div class="hub-card__footer">
+                        <NavLink class="btn-hub btn-hub--purple" href="series">
+                            <span>Explore TV Series (@ViewModel.TotalSeries)</span>
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <polyline points="9 18 15 12 9 6"></polyline>
+                            </svg>
+                        </NavLink>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Featured Movies Section -->
+        <section class="section">
+            <div class="section__header">
+                <div>
+                    <h2 class="section__title">Top Rated Movies</h2>
+                    <p class="section__description">Highest-rated cinematic masterpieces in our archive.</p>
+                </div>
+                <NavLink class="section__link" href="movies">
+                    <span>View all movies</span>
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="9 18 15 12 9 6"></polyline>
+                    </svg>
+                </NavLink>
+            </div>
+
+            <div class="cards-grid">
+                @foreach (var movie in ViewModel.FeaturedMovies)
+                {
+                    <MovieCard
+                        @key="movie.Id"
+                        Movie="movie"
+                        OnAddToWatchList="m => ViewModel.AddMovieToWatchListAsync(m)"
+                        IsInWatchList="@ViewModel.MovieWatchList.Any(m => m.Id == movie.Id)" />
                 }
             </div>
-        }
-    </section>
+        </section>
+
+        <!-- Featured TV Series Section -->
+        <section class="section">
+            <div class="section__header">
+                <div>
+                    <h2 class="section__title">Top Rated TV Series</h2>
+                    <p class="section__description">Critically acclaimed television shows and miniseries.</p>
+                </div>
+                <NavLink class="section__link" href="series">
+                    <span>View all TV series</span>
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="9 18 15 12 9 6"></polyline>
+                    </svg>
+                </NavLink>
+            </div>
+
+            <div class="cards-grid">
+                @foreach (var series in ViewModel.FeaturedSeries)
+                {
+                    <SeriesCard
+                        @key="series.Id"
+                        Series="series"
+                        OnAddToWatchList="s => ViewModel.AddSeriesToWatchListAsync(s)"
+                        IsInWatchList="@ViewModel.SeriesWatchList.Any(s => s.Id == series.Id)" />
+                }
+            </div>
+        </section>
+
+        <!-- Watchlist Overview Section -->
+        <section class="watchlist-overview">
+            <div class="watchlist-overview__header">
+                <div class="watchlist-header__title-group">
+                    <div class="watchlist-icon-wrap">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="m19 21-7-4-7 4V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v16z"></path>
+                        </svg>
+                    </div>
+                    <div>
+                        <h2 class="watchlist-title">
+                            Your Watchlist
+                            <span class="watchlist-counter">@ViewModel.TotalWatchListCount</span>
+                        </h2>
+                        <p class="watchlist-subtitle">Quick summary of saved movies and television shows</p>
+                    </div>
+                </div>
+            </div>
+
+            @if (ViewModel.TotalWatchListCount == 0)
+            {
+                <div class="watchlist-empty">
+                    <div class="empty-icon-wrap">
+                        <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#4b5563" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="m19 21-7-4-7 4V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v16z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="empty-title">Your Watchlist is Empty</h3>
+                    <p class="empty-text">Browse movies or TV series and click "Add to Watchlist" to queue your favorites here.</p>
+                    <div class="empty-actions">
+                        <NavLink class="btn-browse" href="movies">Browse Movies</NavLink>
+                        <NavLink class="btn-browse btn-browse--secondary" href="series">Browse TV Series</NavLink>
+                    </div>
+                </div>
+            }
+            else
+            {
+                <div class="watchlist-preview-grid">
+                    @if (ViewModel.MovieWatchList.Count > 0)
+                    {
+                        <div class="watchlist-group">
+                            <div class="watchlist-group__title">
+                                <span>Saved Movies (@ViewModel.MovieWatchList.Count)</span>
+                                <NavLink href="movies#watchlist" class="watchlist-group__link">View all in Movies →</NavLink>
+                            </div>
+                            <div class="watchlist-mini-list">
+                                @foreach (var movie in ViewModel.MovieWatchList)
+                                {
+                                    <div class="watchlist-mini-card" @key="movie.Id">
+                                        <div class="watchlist-mini-card__info">
+                                            <span class="watchlist-mini-card__genre">@movie.Genre</span>
+                                            <span class="watchlist-mini-card__title">@movie.Title</span>
+                                            <span class="watchlist-mini-card__meta">@movie.ReleaseDate • ★ @movie.Rating.ToString("0.0")</span>
+                                        </div>
+                                        <div class="watchlist-mini-card__actions">
+                                            <NavLink class="btn-mini-view" href="@($"/movies/details/{movie.Id}")">View</NavLink>
+                                            <button class="btn-mini-remove" @onclick="() => ViewModel.RemoveMovieFromWatchListAsync(movie)" title="Remove">✕</button>
+                                        </div>
+                                    </div>
+                                }
+                            </div>
+                        </div>
+                    }
+
+                    @if (ViewModel.SeriesWatchList.Count > 0)
+                    {
+                        <div class="watchlist-group">
+                            <div class="watchlist-group__title">
+                                <span>Saved TV Series (@ViewModel.SeriesWatchList.Count)</span>
+                                <NavLink href="series#watchlist" class="watchlist-group__link">View all in Series →</NavLink>
+                            </div>
+                            <div class="watchlist-mini-list">
+                                @foreach (var series in ViewModel.SeriesWatchList)
+                                {
+                                    <div class="watchlist-mini-card" @key="series.Id">
+                                        <div class="watchlist-mini-card__info">
+                                            <span class="watchlist-mini-card__genre">@series.Network • @series.Genre</span>
+                                            <span class="watchlist-mini-card__title">@series.Title</span>
+                                            <span class="watchlist-mini-card__meta">@series.Seasons @(series.Seasons == 1 ? "Season" : "Seasons") • ★ @series.Rating.ToString("0.0")</span>
+                                        </div>
+                                        <div class="watchlist-mini-card__actions">
+                                            <NavLink class="btn-mini-view" href="@($"/series/details/{series.Id}")">View</NavLink>
+                                            <button class="btn-mini-remove" @onclick="() => ViewModel.RemoveSeriesFromWatchListAsync(series)" title="Remove">✕</button>
+                                        </div>
+                                    </div>
+                                }
+                            </div>
+                        </div>
+                    }
+                </div>
+            }
+        </section>
+    }
 </div>
-
-
-
 
 @code
 {
     protected override async Task OnInitializedAsync()
     {
-        await ViewModel.LoacAsync();
+        await ViewModel.LoadAsync();
     }
 }

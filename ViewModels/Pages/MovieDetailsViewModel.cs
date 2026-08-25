@@ -9,15 +9,45 @@ public class MovieDetailsViewModel : ViewModelBase
     private readonly IMovieService _movieService;
     private readonly ITmdbService _tmdbService;
 
-    public Movie? Movie { get; private set; }
-    
-    public bool IsInWatchList {get; private set;}
+    private Movie? _movie;
 
-    public string? PosterUrl { get; private set; }
+    public Movie? Movie
+    {
+        get => _movie;
+        private set => SetProperty(ref _movie, value);
+    }
 
-    public Movie? PreviousMovie { get; private set; }
+    private bool _isInWatchList;
 
-    public Movie? NextMovie { get; private set; }
+    public bool IsInWatchList
+    {
+        get => _isInWatchList;
+        private set => SetProperty(ref _isInWatchList, value);
+    }
+
+    private string? _posterUrl;
+
+    public string? PosterUrl
+    {
+        get => _posterUrl;
+        private set => SetProperty(ref _posterUrl, value);
+    }
+
+    private Movie? _previousMovie;
+
+    public Movie? PreviousMovie
+    {
+        get => _previousMovie;
+        private set => SetProperty(ref _previousMovie, value);
+    }
+
+    private Movie? _nextMovie;
+
+    public Movie? NextMovie
+    {
+        get => _nextMovie;
+        private set => SetProperty(ref _nextMovie, value);
+    }
 
     public MovieDetailsViewModel(IMovieService movieService, ITmdbService tmdbService)
     {
@@ -79,8 +109,9 @@ public class MovieDetailsViewModel : ViewModelBase
         if (Movie is null)
         {
             return;
-            await _movieService.AddToWatchListAsync(Movie);
-            IsInWatchList = true;
         }
+
+        await _movieService.AddToWatchListAsync(Movie);
+        IsInWatchList = true;
     }
 }

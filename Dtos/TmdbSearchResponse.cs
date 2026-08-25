@@ -14,7 +14,10 @@ public class TmdbMovieResult
     public int Id { get; set; }
 
     [JsonPropertyName("title")]
-    public string Title { get; set; } = "";
+    public string? Title { get; set; }
+
+    [JsonPropertyName("name")]
+    public string? Name { get; set; }
 
     [JsonPropertyName("poster_path")]
     public string? PosterPath { get; set; }

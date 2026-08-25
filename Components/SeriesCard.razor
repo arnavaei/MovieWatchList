@@ -1,0 +1,101 @@
+@using MovieWatchList.Models
+@using MovieWatchList.ViewModels.Components
+@inherits ViewModelComponentBase<SeriesCardViewModel>
+
+<div class="series-card">
+    <div class="series-card__poster-wrapper">
+        <div class="series-card__poster">
+            @if (ViewModel.IsLoadingPoster)
+            {
+                <div class="series-card__poster-skeleton skeleton-shimmer">
+                    <div class="skeleton-icon">
+                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.2)" stroke-width="1.5">
+                            <rect width="20" height="15" x="2" y="7" rx="2" ry="2"></rect>
+                            <polyline points="17 2 12 7 7 2"></polyline>
+                        </svg>
+                    </div>
+                </div>
+            }
+            else if (ViewModel.ErrorMessage is not null || ViewModel.PosterUrl is null)
+            {
+                <div class="series-card__poster-fallback">
+                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#4b5563" stroke-width="1.5">
+                        <rect width="20" height="15" x="2" y="7" rx="2" ry="2"></rect>
+                        <polyline points="17 2 12 7 7 2"></polyline>
+                    </svg>
+                    <span>Poster unavailable</span>
+                </div>
+            }
+            else
+            {
+                <img class="series-card__image" src="@ViewModel.PosterUrl" alt="@Series.Title poster" loading="lazy" />
+                <div class="series-card__poster-overlay"></div>
+            }
+        </div>
+
+        <div class="series-card__network-badge">
+            <span>@Series.Network</span>
+        </div>
+
+        <div class="series-card__poster-badge">
+            <svg width="11" height="11" viewBox="0 0 24 24" fill="#e8b04b" stroke="#e8b04b">
+                <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+            </svg>
+            <span>@Series.Rating.ToString("0.0")</span>
+        </div>
+    </div>
+
+    <div class="series-card__content">
+        <SeriesInfo Series="Series" Variant="card" />
+
+        <div class="series-card__actions">
+            @if (IsInWatchList)
+            {
+                <button class="btn btn--added" disabled aria-label="Added to watchlist">
+                    <span class="btn__icon">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                            <polyline points="20 6 9 17 4 12"></polyline>
+                        </svg>
+                    </span>
+                    <span class="btn__label">In Watchlist</span>
+                </button>
+            }
+            else
+            {
+                <button class="btn btn--add" @onclick="() => OnAddToWatchList.InvokeAsync(Series)" aria-label="Add @Series.Title to watchlist">
+                    <span class="btn__icon">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                            <line x1="12" y1="5" x2="12" y2="19"></line>
+                            <line x1="5" y1="12" x2="19" y2="12"></line>
+                        </svg>
+                    </span>
+                    <span class="btn__label">Add to Watchlist</span>
+                </button>
+            }
+
+            <NavLink class="btn-details" href="@($"/series/details/{Series.Id}")">
+                <span>Details</span>
+                <svg class="arrow-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="9 18 15 12 9 6"></polyline>
+                </svg>
+            </NavLink>
+        </div>
+    </div>
+</div>
+
+@code
+{
+    [Parameter]
+    public Series Series { get; set; } = default!;
+
+    [Parameter]
+    public EventCallback<Series> OnAddToWatchList { get; set; }
+
+    [Parameter]
+    public bool IsInWatchList { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        await ViewModel.LoadPosterAsync(Series.Title);
+    }
+}

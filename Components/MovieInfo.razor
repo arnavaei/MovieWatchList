@@ -1,30 +1,86 @@
 ﻿@using MovieWatchList.Models
 
-<div class="Movie-info">
-    <h2>
-        @Movie.Title
-    </h2>
-    
-    <p>
-        Director: @Movie.Director
-    </p>
-    
-    <p>
-        Genre: @Movie.Genre
-    </p>
-    
-    <p>
-        Rating:
-        @Movie.Rating.ToString("0.0")
-    </p>
-    
-    <p>
-        Release Date:
-        @Movie.ReleaseDate
-    </p>
-</div>
+@if (Movie is not null)
+{
+    @if (Variant == "detail")
+    {
+        <div class="movie-info movie-info--detail">
+            <div class="movie-info__tags">
+                <span class="badge badge--genre">@Movie.Genre</span>
+                <span class="badge badge--year">@Movie.ReleaseDate</span>
+                <span class="badge badge--rating">
+                    <svg class="star-icon" width="13" height="13" viewBox="0 0 24 24" fill="#e8b04b" stroke="#e8b04b" stroke-width="1">
+                        <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+                    </svg>
+                    @Movie.Rating.ToString("0.0")
+                </span>
+            </div>
+
+            <h1 class="movie-info__detail-title">@Movie.Title</h1>
+            
+            <p class="movie-info__director-callout">
+                <span class="callout-icon">
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="m22 8-6 4 6 4V8Z"></path>
+                        <rect width="14" height="12" x="2" y="6" rx="2" ry="2"></rect>
+                    </svg>
+                </span>
+                <span>Directed by <strong class="director-name">@Movie.Director</strong></span>
+            </p>
+
+            <div class="movie-info__grid">
+                <div class="stat-pill">
+                    <span class="stat-pill__label">Director</span>
+                    <span class="stat-pill__value">@Movie.Director</span>
+                </div>
+                <div class="stat-pill">
+                    <span class="stat-pill__label">Genre</span>
+                    <span class="stat-pill__value">@Movie.Genre</span>
+                </div>
+                <div class="stat-pill">
+                    <span class="stat-pill__label">Release Year</span>
+                    <span class="stat-pill__value">@Movie.ReleaseDate</span>
+                </div>
+                <div class="stat-pill stat-pill--highlight">
+                    <span class="stat-pill__label">Audience Score</span>
+                    <div class="stat-pill__score">
+                        <svg class="star-icon" width="16" height="16" viewBox="0 0 24 24" fill="#e8b04b" stroke="#e8b04b" stroke-width="1">
+                            <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+                        </svg>
+                        <span class="score-num">@Movie.Rating.ToString("0.0")</span>
+                        <span class="score-scale">/ 10</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+    else
+    {
+        <div class="movie-info movie-info--card">
+            <div class="movie-info__header">
+                <h3 class="movie-info__title" title="@Movie.Title">@Movie.Title</h3>
+                <span class="movie-info__year">@Movie.ReleaseDate</span>
+            </div>
+            
+            <p class="movie-info__director">
+                <span class="director-prefix">Dir.</span> @Movie.Director
+            </p>
+            
+            <div class="movie-info__meta-row">
+                <span class="movie-info__genre">@Movie.Genre</span>
+                <div class="movie-info__rating" title="Rating: @Movie.Rating.ToString("0.0")/10">
+                    <svg class="star-icon" width="13" height="13" viewBox="0 0 24 24" fill="#e8b04b" stroke="#e8b04b" stroke-width="1">
+                        <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+                    </svg>
+                    <span>@Movie.Rating.ToString("0.0")</span>
+                </div>
+            </div>
+        </div>
+    }
+}
 
 @code
 {
-    [Parameter] public Movie Movie { get; set; } = default;
+    [Parameter] public Movie Movie { get; set; } = default!;
+    [Parameter] public string Variant { get; set; } = "card";
 }

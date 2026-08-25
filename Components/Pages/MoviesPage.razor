@@ -1,0 +1,242 @@
+@page "/movies"
+@rendermode InteractiveServer
+@using MovieWatchList.Models
+@using MovieWatchList.ViewModels.Pages
+@inherits ViewModelComponentBase<MovieListViewModel>
+
+<PageTitle>Movies | CineTrack</PageTitle>
+
+<div class="movies-container">
+    <!-- Hero Header -->
+    <header class="hero-header">
+        <div class="hero-header__content">
+            <div class="hero-badge">
+                <span class="hero-badge__dot"></span>
+                <span>Curated Film Archive</span>
+            </div>
+            <h1 class="hero-title">Explore & Track Cinema</h1>
+            <p class="hero-subtitle">Discover iconic masterpieces, view comprehensive details, and build your personalized watchlist.</p>
+        </div>
+
+        <div class="hero-stats">
+            <div class="stat-card">
+                <span class="stat-card__number">@ViewModel.Movies.Count</span>
+                <span class="stat-card__label">Featured Movies</span>
+            </div>
+            <div class="stat-card stat-card--accent">
+                <span class="stat-card__number">@ViewModel.WatchList.Count</span>
+                <span class="stat-card__label">In Watchlist</span>
+            </div>
+        </div>
+    </header>
+
+    @if (ViewModel.IsLoading)
+    {
+        <div class="loading-grid">
+            @for (int i = 0; i < 6; i++)
+            {
+                <div class="skeleton-card skeleton-shimmer">
+                    <div class="skeleton-poster"></div>
+                    <div class="skeleton-line" style="width: 70%;"></div>
+                    <div class="skeleton-line" style="width: 40%;"></div>
+                </div>
+            }
+        </div>
+    }
+    else if (ViewModel.ErrorMessage is not null)
+    {
+        <div class="error-banner">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#ef4444" stroke-width="2">
+                <circle cx="12" cy="12" r="10"></circle>
+                <line x1="12" y1="8" x2="12" y2="12"></line>
+                <line x1="12" y1="16" x2="12.01" y2="16"></line>
+            </svg>
+            <div>
+                <h4>Unable to Load Movies</h4>
+                <p>@ViewModel.ErrorMessage</p>
+            </div>
+        </div>
+    }
+    else
+    {
+        <!-- Interactive Filter & Search Bar -->
+        <section class="filter-section">
+            <div class="filter-bar">
+                <div class="search-box">
+                    <svg class="search-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="11" cy="11" r="8"></circle>
+                        <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                    </svg>
+                    <input type="text"
+                           class="search-input"
+                           placeholder="Search by title, director, or genre..."
+                           value="@ViewModel.SearchTerm"
+                           @oninput="OnSearchChanged" />
+                    @if (!string.IsNullOrWhiteSpace(ViewModel.SearchTerm))
+                    {
+                        <button class="search-clear" @onclick="ClearSearch" aria-label="Clear search">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <line x1="18" y1="6" x2="6" y2="18"></line>
+                                <line x1="6" y1="6" x2="18" y2="18"></line>
+                            </svg>
+                        </button>
+                    }
+                </div>
+            </div>
+
+            <!-- Genre Filter Pills -->
+            <div class="genre-scroll">
+                @foreach (var genre in ViewModel.AvailableGenres)
+                {
+                    <button class="genre-pill @(ViewModel.SelectedGenre == genre ? "genre-pill--active" : "")"
+                            @onclick="() => ViewModel.SelectedGenre = genre">
+                        @genre
+                    </button>
+                }
+            </div>
+        </section>
+
+        <!-- Movie Grid Section -->
+        <section class="section">
+            <div class="section__header">
+                <div>
+                    <h2 class="section__title">
+                        @if (ViewModel.SelectedGenre != "All" || !string.IsNullOrWhiteSpace(ViewModel.SearchTerm))
+                        {
+                            <span>Filtered Titles (@ViewModel.FilteredMovies.Count)</span>
+                        }
+                        else
+                        {
+                            <span>Featured Titles (@ViewModel.FilteredMovies.Count)</span>
+                        }
+                    </h2>
+                    <p class="section__description">Select any movie to explore synopsis, crew, and scores.</p>
+                </div>
+            </div>
+
+            @if (ViewModel.FilteredMovies.Count == 0)
+            {
+                <div class="no-results-card">
+                    <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#6b7280" stroke-width="1.5">
+                        <circle cx="11" cy="11" r="8"></circle>
+                        <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                        <line x1="8" y1="11" x2="14" y2="11"></line>
+                    </svg>
+                    <h3>No Movies Found</h3>
+                    <p>No titles matched your current search filters. Try selecting a different genre or clearing your query.</p>
+                    <button class="btn-reset" @onclick="ResetFilters">Reset Filters</button>
+                </div>
+            }
+            else
+            {
+                <div class="movie-grid">
+                    @foreach (var movie in ViewModel.FilteredMovies)
+                    {
+                        <MovieCard
+                            @key="movie.Id"
+                            Movie="movie"
+                            OnAddToWatchList="m => ViewModel.AddToWatchListAsync(m)"
+                            IsInWatchList="@ViewModel.WatchList.Any(m => m.Id == movie.Id)" />
+                    }
+                </div>
+            }
+        </section>
+
+        <!-- Watchlist Section -->
+        <section class="watchlist-section" id="watchlist">
+            <div class="watchlist-header">
+                <div class="watchlist-header__title-group">
+                    <div class="watchlist-icon-wrap">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="m19 21-7-4-7 4V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v16z"></path>
+                        </svg>
+                    </div>
+                    <div>
+                        <h2 class="watchlist-title">
+                            Movie Watchlist
+                            <span class="watchlist-counter">@ViewModel.WatchList.Count</span>
+                        </h2>
+                        <p class="watchlist-subtitle">Your saved movies ready for viewing</p>
+                    </div>
+                </div>
+            </div>
+
+            @if (ViewModel.WatchList.Count == 0)
+            {
+                <div class="watchlist-empty">
+                    <div class="empty-icon-wrap">
+                        <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#4b5563" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                            <rect width="20" height="20" x="2" y="2" rx="2.18" ry="2.18"></rect>
+                            <line x1="7" x2="7" y1="2" y2="22"></line>
+                            <line x1="17" x2="17" y1="2" y2="22"></line>
+                            <line x1="2" x2="22" y1="12" y2="12"></line>
+                            <line x1="2" x2="7" y1="7" y2="7"></line>
+                            <line x1="2" x2="7" y1="17" y2="17"></line>
+                            <line x1="17" x2="22" y1="17" y2="17"></line>
+                            <line x1="17" x2="22" y1="7" y2="7"></line>
+                        </svg>
+                    </div>
+                    <h3 class="empty-title">Your Movie Watchlist is Empty</h3>
+                    <p class="empty-text">Click "Add to Watchlist" on any movie card above to queue it for movie night.</p>
+                </div>
+            }
+            else
+            {
+                <div class="watchlist-grid">
+                    @foreach (var movie in ViewModel.WatchList)
+                    {
+                        <div class="watchlist-card" @key="movie.Id">
+                            <div class="watchlist-card__info">
+                                <span class="watchlist-card__genre">@movie.Genre</span>
+                                <h3 class="watchlist-card__title">@movie.Title</h3>
+                                <div class="watchlist-card__meta">
+                                    <span>@movie.ReleaseDate</span>
+                                    <span>•</span>
+                                    <span class="watchlist-card__director">@movie.Director</span>
+                                    <span>•</span>
+                                    <span class="watchlist-card__rating">★ @movie.Rating.ToString("0.0")</span>
+                                </div>
+                            </div>
+                            <div class="watchlist-card__actions">
+                                <NavLink class="btn-watchlist-view" href="@($"/movies/details/{movie.Id}")">
+                                    <span>View</span>
+                                </NavLink>
+                                <button class="btn-watchlist-remove" @onclick="() => ViewModel.RemoveFromWatchListAsync(movie)" title="Remove from watchlist" aria-label="Remove @movie.Title from watchlist">
+                                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                        <polyline points="3 6 5 6 21 6"></polyline>
+                                        <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
+                                    </svg>
+                                    <span>Remove</span>
+                                </button>
+                            </div>
+                        </div>
+                    }
+                </div>
+            }
+        </section>
+    }
+</div>
+
+@code
+{
+    protected override async Task OnInitializedAsync()
+    {
+        await ViewModel.LoadAsync();
+    }
+
+    private void OnSearchChanged(ChangeEventArgs e)
+    {
+        ViewModel.SearchTerm = e.Value?.ToString() ?? "";
+    }
+
+    private void ClearSearch()
+    {
+        ViewModel.SearchTerm = "";
+    }
+
+    private void ResetFilters()
+    {
+        ViewModel.SearchTerm = "";
+        ViewModel.SelectedGenre = "All";
+    }
+}

@@ -63,6 +63,26 @@ public class MovieService : IMovieService
             Director = "Quentin Tarantino",
             Genre = "Thriller",
             Rating = 8.1
+        },
+        
+        new Movie
+        {
+            Id = 7,
+            Title = "Parasite",
+            ReleaseDate = 2019,
+            Director = "Bong Joon Ho",
+            Genre = "Thriller",
+            Rating = 8.5
+        },
+        
+        new Movie
+        {
+            Id = 8,
+            Title = "Fight Club",
+            ReleaseDate = 1999,
+            Director = "David Fincher",
+            Genre = "Action",
+            Rating = 8.8
         }
     ];
 

@@ -1,13 +1,25 @@
 ﻿@inherits LayoutComponentBase
 
 <div class="page">
-    <div class="sidebar">
-        <NavMenu/>
-    </div>
+    <aside class="sidebar">
+        <NavMenu />
+    </aside>
 
-    <main>
+    <main class="main-content">
         <div class="top-row px-4">
-            <a href="https://learn.microsoft.com/aspnet/core/" target="_blank">About</a>
+            <div class="top-row__badge">
+                <span class="status-dot"></span>
+                <span>Cinema Explorer</span>
+            </div>
+            <div class="top-row__links">
+                <a href="https://www.themoviedb.org/" target="_blank" rel="noopener noreferrer" class="external-link">
+                    <span>Powered by TMDB</span>
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M7 17L17 7"></path>
+                        <path d="M7 7h10v10"></path>
+                    </svg>
+                </a>
+            </div>
         </div>
 
         <article class="content px-4">

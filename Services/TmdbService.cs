@@ -34,4 +34,22 @@ public class TmdbService : ITmdbService
 
         return $"{BaseImageUrl}{firstResult.PosterPath}";
     }
+
+    public async Task<string?> GetTvPosterUrlAsync(
+        string seriesTitle,
+        CancellationToken cancellationToken = default)
+    {
+        var url = $"https://api.themoviedb.org/3/search/tv?api_key={_apiKey}&query={Uri.EscapeDataString(seriesTitle)}";
+
+        var response = await _httpClient.GetFromJsonAsync<TmdbSearchResponse>(url, cancellationToken);
+
+        var firstResult = response?.Results.FirstOrDefault();
+
+        if (firstResult?.PosterPath is null)
+        {
+            return null;
+        }
+
+        return $"{BaseImageUrl}{firstResult.PosterPath}";
+    }
 }

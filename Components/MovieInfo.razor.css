@@ -1,0 +1,217 @@
+/* Card Variant */
+.movie-info--card {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.movie-info__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 8px;
+}
+
+.movie-info__title {
+    margin: 0;
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: #f9fafb;
+    line-height: 1.35;
+    letter-spacing: -0.01em;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.movie-info__year {
+    font-size: 0.8rem;
+    font-weight: 500;
+    color: #9ca3af;
+    background: rgba(255, 255, 255, 0.05);
+    padding: 2px 7px;
+    border-radius: 6px;
+    white-space: nowrap;
+}
+
+.movie-info__director {
+    margin: 0;
+    font-size: 0.82rem;
+    color: #9ca3af;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.director-prefix {
+    color: #6b7280;
+    font-size: 0.78rem;
+}
+
+.movie-info__meta-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 4px;
+}
+
+.movie-info__genre {
+    font-size: 0.72rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: #cbd5e1;
+    background: rgba(255, 255, 255, 0.06);
+    padding: 3px 9px;
+    border-radius: 999px;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.movie-info__rating {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 0.82rem;
+    font-weight: 700;
+    color: #fbbf24;
+    background: rgba(232, 176, 75, 0.1);
+    padding: 2px 8px;
+    border-radius: 999px;
+    border: 1px solid rgba(232, 176, 75, 0.2);
+}
+
+.star-icon {
+    flex-shrink: 0;
+}
+
+/* Detail Variant */
+.movie-info--detail {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    animation: fadeIn 0.4s ease;
+}
+
+.movie-info__tags {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px;
+}
+
+.badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 0.78rem;
+    font-weight: 600;
+    padding: 4px 12px;
+    border-radius: 999px;
+    letter-spacing: 0.02em;
+}
+
+.badge--genre {
+    background: rgba(255, 255, 255, 0.08);
+    color: #e2e8f0;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.badge--year {
+    background: rgba(255, 255, 255, 0.04);
+    color: #94a3b8;
+    border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.badge--rating {
+    background: rgba(232, 176, 75, 0.15);
+    color: #fbbf24;
+    border: 1px solid rgba(232, 176, 75, 0.3);
+}
+
+.movie-info__detail-title {
+    font-size: clamp(1.8rem, 4vw, 2.75rem);
+    font-weight: 800;
+    color: #ffffff;
+    letter-spacing: -0.03em;
+    line-height: 1.15;
+    margin: 0;
+}
+
+.movie-info__director-callout {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin: 0;
+    font-size: 0.95rem;
+    color: #94a3b8;
+}
+
+.callout-icon {
+    display: flex;
+    align-items: center;
+    color: var(--accent-amber, #e8b04b);
+}
+
+.director-name {
+    color: #f1f5f9;
+    font-weight: 600;
+}
+
+.movie-info__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+    gap: 12px;
+    margin-top: 8px;
+}
+
+.stat-pill {
+    background: rgba(20, 23, 33, 0.6);
+    border: 1px solid rgba(255, 255, 255, 0.07);
+    border-radius: 12px;
+    padding: 12px 14px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    transition: transform 0.2s ease, border-color 0.2s ease;
+}
+
+.stat-pill:hover {
+    border-color: rgba(255, 255, 255, 0.15);
+    transform: translateY(-2px);
+}
+
+.stat-pill__label {
+    font-size: 0.7rem;
+    font-weight: 700;
+    color: #64748b;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+}
+
+.stat-pill__value {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: #f8fafc;
+}
+
+.stat-pill--highlight {
+    background: linear-gradient(135deg, rgba(232, 176, 75, 0.12), rgba(20, 23, 33, 0.6));
+    border-color: rgba(232, 176, 75, 0.25);
+}
+
+.stat-pill__score {
+    display: flex;
+    align-items: baseline;
+    gap: 4px;
+}
+
+.score-num {
+    font-size: 1.15rem;
+    font-weight: 800;
+    color: #fbbf24;
+}
+
+.score-scale {
+    font-size: 0.75rem;
+    color: #94a3b8;
+}

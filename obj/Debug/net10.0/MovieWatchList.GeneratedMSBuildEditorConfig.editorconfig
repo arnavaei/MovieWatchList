@@ -27,28 +27,12 @@ build_property.EnableCodeStyleSeverity =
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xBcHAucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/y.arnavaei/RiderProjects/MovieWatchList/MovieWatchList/Components/MovieInfo.razor]
-build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xNb3ZpZUluZm8ucmF6b3I=
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Users/y.arnavaei/RiderProjects/MovieWatchList/MovieWatchList/Components/Pages/Counter.razor]
-build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xDb3VudGVyLnJhem9y
-build_metadata.AdditionalFiles.CssScope = 
-
 [C:/Users/y.arnavaei/RiderProjects/MovieWatchList/MovieWatchList/Components/Pages/Error.razor]
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xFcnJvci5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/y.arnavaei/RiderProjects/MovieWatchList/MovieWatchList/Components/Pages/MovieDetails.razor]
-build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xNb3ZpZURldGFpbHMucmF6b3I=
-build_metadata.AdditionalFiles.CssScope = 
-
 [C:/Users/y.arnavaei/RiderProjects/MovieWatchList/MovieWatchList/Components/Pages/NotFound.razor]
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xOb3RGb3VuZC5yYXpvcg==
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Users/y.arnavaei/RiderProjects/MovieWatchList/MovieWatchList/Components/Pages/Weather.razor]
-build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xXZWF0aGVyLnJhem9y
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/y.arnavaei/RiderProjects/MovieWatchList/MovieWatchList/Components/Routes.razor]
@@ -75,6 +59,34 @@ build_metadata.AdditionalFiles.CssScope = b-72qh9e9bhl
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xNb3ZpZUNhcmQucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = b-ptmjjf0wph
 
+[C:/Users/y.arnavaei/RiderProjects/MovieWatchList/MovieWatchList/Components/MovieInfo.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xNb3ZpZUluZm8ucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = b-9lylozo6wx
+
 [C:/Users/y.arnavaei/RiderProjects/MovieWatchList/MovieWatchList/Components/Pages/Home.razor]
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xIb21lLnJhem9y
 build_metadata.AdditionalFiles.CssScope = b-2nwy3wgci1
+
+[C:/Users/y.arnavaei/RiderProjects/MovieWatchList/MovieWatchList/Components/Pages/MovieDetails.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xNb3ZpZURldGFpbHMucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = b-d5n7dbg695
+
+[C:/Users/y.arnavaei/RiderProjects/MovieWatchList/MovieWatchList/Components/Pages/MoviesPage.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xNb3ZpZXNQYWdlLnJhem9y
+build_metadata.AdditionalFiles.CssScope = b-e3g2mbu9sg
+
+[C:/Users/y.arnavaei/RiderProjects/MovieWatchList/MovieWatchList/Components/Pages/SeriesDetails.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xTZXJpZXNEZXRhaWxzLnJhem9y
+build_metadata.AdditionalFiles.CssScope = b-yel1y0qffu
+
+[C:/Users/y.arnavaei/RiderProjects/MovieWatchList/MovieWatchList/Components/Pages/SeriesPage.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xTZXJpZXNQYWdlLnJhem9y
+build_metadata.AdditionalFiles.CssScope = b-1k124q36k0
+
+[C:/Users/y.arnavaei/RiderProjects/MovieWatchList/MovieWatchList/Components/SeriesCard.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xTZXJpZXNDYXJkLnJhem9y
+build_metadata.AdditionalFiles.CssScope = b-yaaw8in8zm
+
+[C:/Users/y.arnavaei/RiderProjects/MovieWatchList/MovieWatchList/Components/SeriesInfo.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xTZXJpZXNJbmZvLnJhem9y
+build_metadata.AdditionalFiles.CssScope = b-9caawfr4qn

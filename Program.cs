@@ -17,6 +17,7 @@ builder.Services.AddTransient<MovieListViewModel>();
 builder.Services.AddTransient<MovieCardViewModel>();
 builder.Services.AddTransient<SeriesDetailsViewModel>();
 builder.Services.AddTransient<SeriesListViewModel>();
+builder.Services.AddTransient<RealityListViewModel>();
 builder.Services.AddTransient<SeriesCardViewModel>();
 builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents();

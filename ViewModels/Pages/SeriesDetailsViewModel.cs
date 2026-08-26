@@ -70,14 +70,16 @@ public class SeriesDetailsViewModel : ViewModelBase
                 PosterUrl = await _tmdbService.GetTvPosterUrlAsync(Series.Title);
                 IsInWatchList = _seriesService.GetWatchList().Any(s => s.Id == Series.Id);
 
-                var allSeries = _seriesService.GetSeries();
+                var catalog = Series.IsRealityShow
+                    ? _seriesService.GetRealityShows()
+                    : _seriesService.GetSeries();
 
-                PreviousSeries = allSeries
+                PreviousSeries = catalog
                     .Where(s => s.Id < id)
                     .OrderByDescending(s => s.Id)
                     .FirstOrDefault();
 
-                NextSeries = allSeries
+                NextSeries = catalog
                     .Where(s => s.Id > id)
                     .OrderBy(s => s.Id)
                     .FirstOrDefault();

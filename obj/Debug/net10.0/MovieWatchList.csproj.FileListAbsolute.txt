@@ -179,5 +179,6 @@ C:\Users\y.arnavaei\RiderProjects\MovieWatchList\MovieWatchList\obj\Debug\net10.
 C:\Users\y.arnavaei\RiderProjects\MovieWatchList\MovieWatchList\obj\Debug\net10.0\scopedcss\Components\SeriesCard.razor.rz.scp.css
 C:\Users\y.arnavaei\RiderProjects\MovieWatchList\MovieWatchList\obj\Debug\net10.0\scopedcss\Components\SeriesInfo.razor.rz.scp.css
 C:\Users\y.arnavaei\RiderProjects\MovieWatchList\MovieWatchList\obj\Debug\net10.0\scopedcss\Components\Pages\MoviesPage.razor.rz.scp.css
-C:\Users\y.arnavaei\RiderProjects\MovieWatchList\MovieWatchList\obj\Debug\net10.0\compressed\wcfktf9fhf-{0}-6d3x4bk5io-6d3x4bk5io.gz
-C:\Users\y.arnavaei\RiderProjects\MovieWatchList\MovieWatchList\obj\Debug\net10.0\compressed\449r9pdymq-{0}-6d3x4bk5io-6d3x4bk5io.gz
+C:\Users\y.arnavaei\RiderProjects\MovieWatchList\MovieWatchList\obj\Debug\net10.0\scopedcss\Components\Pages\RealityPage.razor.rz.scp.css
+C:\Users\y.arnavaei\RiderProjects\MovieWatchList\MovieWatchList\obj\Debug\net10.0\compressed\wcfktf9fhf-{0}-olw8fm9h80-olw8fm9h80.gz
+C:\Users\y.arnavaei\RiderProjects\MovieWatchList\MovieWatchList\obj\Debug\net10.0\compressed\449r9pdymq-{0}-olw8fm9h80-olw8fm9h80.gz

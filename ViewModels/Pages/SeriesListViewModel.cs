@@ -160,6 +160,6 @@ public class SeriesListViewModel : ViewModelBase
 
     private void RefreshWatchList()
     {
-        WatchList = [.. _seriesService.GetWatchList()];
+        WatchList = [.. _seriesService.GetWatchList().Where(s => !s.IsRealityShow)];
     }
 }

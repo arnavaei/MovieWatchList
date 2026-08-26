@@ -23,6 +23,13 @@ public class HomeViewModel : ViewModelBase
         private set => SetProperty(ref _featuredSeries, value);
     }
 
+    private IReadOnlyList<Series> _featuredRealityShows = [];
+    public IReadOnlyList<Series> FeaturedRealityShows
+    {
+        get => _featuredRealityShows;
+        private set => SetProperty(ref _featuredRealityShows, value);
+    }
+
     private IReadOnlyList<Movie> _movieWatchList = [];
     public IReadOnlyList<Movie> MovieWatchList
     {
@@ -35,6 +42,13 @@ public class HomeViewModel : ViewModelBase
     {
         get => _seriesWatchList;
         private set => SetProperty(ref _seriesWatchList, value);
+    }
+
+    private IReadOnlyList<Series> _realityWatchList = [];
+    public IReadOnlyList<Series> RealityWatchList
+    {
+        get => _realityWatchList;
+        private set => SetProperty(ref _realityWatchList, value);
     }
 
     private int _totalMovies;
@@ -51,7 +65,14 @@ public class HomeViewModel : ViewModelBase
         private set => SetProperty(ref _totalSeries, value);
     }
 
-    public int TotalWatchListCount => MovieWatchList.Count + SeriesWatchList.Count;
+    private int _totalRealityShows;
+    public int TotalRealityShows
+    {
+        get => _totalRealityShows;
+        private set => SetProperty(ref _totalRealityShows, value);
+    }
+
+    public int TotalWatchListCount => MovieWatchList.Count + SeriesWatchList.Count + RealityWatchList.Count;
 
     public HomeViewModel(IMovieService movieService, ISeriesService seriesService)
     {
@@ -68,12 +89,15 @@ public class HomeViewModel : ViewModelBase
         {
             var movies = _movieService.GetMovies();
             var series = _seriesService.GetSeries();
+            var realityShows = _seriesService.GetRealityShows();
 
             TotalMovies = movies.Count;
             TotalSeries = series.Count;
+            TotalRealityShows = realityShows.Count;
 
             FeaturedMovies = movies.OrderByDescending(m => m.Rating).Take(4).ToList();
             FeaturedSeries = series.OrderByDescending(s => s.Rating).Take(4).ToList();
+            FeaturedRealityShows = realityShows.OrderByDescending(s => s.Rating).Take(4).ToList();
 
             RefreshWatchLists();
         }
@@ -124,7 +148,9 @@ public class HomeViewModel : ViewModelBase
     private void RefreshWatchLists()
     {
         MovieWatchList = [.. _movieService.GetWatchList()];
-        SeriesWatchList = [.. _seriesService.GetWatchList()];
+        var seriesWatchList = _seriesService.GetWatchList();
+        SeriesWatchList = [.. seriesWatchList.Where(s => !s.IsRealityShow)];
+        RealityWatchList = [.. seriesWatchList.Where(s => s.IsRealityShow)];
         OnPropertyChanged(nameof(TotalWatchListCount));
     }
 }

@@ -14,4 +14,5 @@ public class Series
     public string Network { get; set; } = "";
     public double Rating { get; set; }
     public string Overview { get; set; } = "";
+    public bool IsRealityShow { get; set; }
 }

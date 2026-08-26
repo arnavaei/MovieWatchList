@@ -14,8 +14,8 @@
                 <span class="hero-badge__dot"></span>
                 <span>CineTrack Entertainment Hub</span>
             </div>
-            <h1 class="hero-title">Explore Movies & TV Series</h1>
-            <p class="hero-subtitle">Discover iconic cinema masterpieces, binge-worthy television series, and manage your personalized watchlist in one place.</p>
+            <h1 class="hero-title">Explore Movies, TV Series & Reality</h1>
+            <p class="hero-subtitle">Discover iconic cinema masterpieces, binge-worthy television series, unscripted reality shows, and manage your personalized watchlist in one place.</p>
         </div>
 
         <div class="hero-stats">
@@ -26,6 +26,10 @@
             <div class="stat-card">
                 <span class="stat-card__number">@ViewModel.TotalSeries</span>
                 <span class="stat-card__label">TV Series</span>
+            </div>
+            <div class="stat-card">
+                <span class="stat-card__number">@ViewModel.TotalRealityShows</span>
+                <span class="stat-card__label">Reality Shows</span>
             </div>
             <div class="stat-card stat-card--accent">
                 <span class="stat-card__number">@ViewModel.TotalWatchListCount</span>
@@ -121,6 +125,31 @@
                         </NavLink>
                     </div>
                 </div>
+
+                <!-- Reality Shows Hub Card -->
+                <div class="hub-card hub-card--reality">
+                    <div class="hub-card__header">
+                        <div class="hub-icon hub-icon--teal">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <circle cx="12" cy="12" r="10"></circle>
+                                <polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"></polygon>
+                            </svg>
+                        </div>
+                        <span class="hub-badge hub-badge--teal">Unscripted Archive</span>
+                    </div>
+                    <div class="hub-card__body">
+                        <h2 class="hub-title">Reality Shows</h2>
+                        <p class="hub-desc">Track competition series, makeover programs, and unscripted television separately from scripted dramas.</p>
+                    </div>
+                    <div class="hub-card__footer">
+                        <NavLink class="btn-hub btn-hub--teal" href="reality">
+                            <span>Explore Reality (@ViewModel.TotalRealityShows)</span>
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <polyline points="9 18 15 12 9 6"></polyline>
+                            </svg>
+                        </NavLink>
+                    </div>
+                </div>
             </div>
         </section>
 
@@ -178,6 +207,33 @@
             </div>
         </section>
 
+        <!-- Featured Reality Shows Section -->
+        <section class="section">
+            <div class="section__header">
+                <div>
+                    <h2 class="section__title">Top Rated Reality Shows</h2>
+                    <p class="section__description">Popular unscripted competitions, makeovers, and reality television.</p>
+                </div>
+                <NavLink class="section__link" href="reality">
+                    <span>View all reality shows</span>
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="9 18 15 12 9 6"></polyline>
+                    </svg>
+                </NavLink>
+            </div>
+
+            <div class="cards-grid">
+                @foreach (var show in ViewModel.FeaturedRealityShows)
+                {
+                    <SeriesCard
+                        @key="show.Id"
+                        Series="show"
+                        OnAddToWatchList="s => ViewModel.AddSeriesToWatchListAsync(s)"
+                        IsInWatchList="@ViewModel.RealityWatchList.Any(s => s.Id == show.Id)" />
+                }
+            </div>
+        </section>
+
         <!-- Watchlist Overview Section -->
         <section class="watchlist-overview">
             <div class="watchlist-overview__header">
@@ -192,7 +248,7 @@
                             Your Watchlist
                             <span class="watchlist-counter">@ViewModel.TotalWatchListCount</span>
                         </h2>
-                        <p class="watchlist-subtitle">Quick summary of saved movies and television shows</p>
+                        <p class="watchlist-subtitle">Quick summary of saved movies, television shows, and reality series</p>
                     </div>
                 </div>
             </div>
@@ -206,10 +262,11 @@
                         </svg>
                     </div>
                     <h3 class="empty-title">Your Watchlist is Empty</h3>
-                    <p class="empty-text">Browse movies or TV series and click "Add to Watchlist" to queue your favorites here.</p>
+                    <p class="empty-text">Browse movies, TV series, or reality shows and click "Add to Watchlist" to queue your favorites here.</p>
                     <div class="empty-actions">
                         <NavLink class="btn-browse" href="movies">Browse Movies</NavLink>
                         <NavLink class="btn-browse btn-browse--secondary" href="series">Browse TV Series</NavLink>
+                        <NavLink class="btn-browse btn-browse--teal" href="reality">Browse Reality</NavLink>
                     </div>
                 </div>
             }
@@ -261,6 +318,32 @@
                                         <div class="watchlist-mini-card__actions">
                                             <NavLink class="btn-mini-view" href="@($"/series/details/{series.Id}")">View</NavLink>
                                             <button class="btn-mini-remove" @onclick="() => ViewModel.RemoveSeriesFromWatchListAsync(series)" title="Remove">✕</button>
+                                        </div>
+                                    </div>
+                                }
+                            </div>
+                        </div>
+                    }
+
+                    @if (ViewModel.RealityWatchList.Count > 0)
+                    {
+                        <div class="watchlist-group">
+                            <div class="watchlist-group__title">
+                                <span>Saved Reality Shows (@ViewModel.RealityWatchList.Count)</span>
+                                <NavLink href="reality#watchlist" class="watchlist-group__link">View all in Reality →</NavLink>
+                            </div>
+                            <div class="watchlist-mini-list">
+                                @foreach (var show in ViewModel.RealityWatchList)
+                                {
+                                    <div class="watchlist-mini-card" @key="show.Id">
+                                        <div class="watchlist-mini-card__info">
+                                            <span class="watchlist-mini-card__genre">@show.Network • @show.Genre</span>
+                                            <span class="watchlist-mini-card__title">@show.Title</span>
+                                            <span class="watchlist-mini-card__meta">@show.Seasons @(show.Seasons == 1 ? "Season" : "Seasons") • ★ @show.Rating.ToString("0.0")</span>
+                                        </div>
+                                        <div class="watchlist-mini-card__actions">
+                                            <NavLink class="btn-mini-view" href="@($"/series/details/{show.Id}")">View</NavLink>
+                                            <button class="btn-mini-remove" @onclick="() => ViewModel.RemoveSeriesFromWatchListAsync(show)" title="Remove">✕</button>
                                         </div>
                                     </div>
                                 }

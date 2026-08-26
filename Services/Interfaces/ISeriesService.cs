@@ -6,6 +6,8 @@ public interface ISeriesService
 {
     IReadOnlyList<Series> GetSeries();
 
+    IReadOnlyList<Series> GetRealityShows();
+
     IReadOnlyList<Series> GetWatchList();
 
     Task<Series?> GetSeriesByIdAsync(int id);
